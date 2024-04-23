@@ -18,9 +18,10 @@ class FERDataset(Dataset):
         self.files = os.listdir(self.root)
 
     def __getitem__(self, index):
+        add_label = [0, 10, 16]
         filename = self.files[index % len(self.files)]
-        ds_num = int((filename.split('ds')[-1]).split('_')[0])
-        label = int((filename.split('cls')[-1]).split('_')[0])
+        ds_num = int((filename.split('ds')[-1]).split('_')[0]) - 1
+        label = int((filename.split('cls')[-1]).split('_')[0]) + add_label[ds_num]
         imgpath = self.root + filename
         img = self.transform(Image.open(imgpath))
 

@@ -1,9 +1,3 @@
-'''将Exchange-GAN和Star-GAN相结合, 使该结构能够适用于非匹配数据集
-对中心向量之间的最小距离设置了阈值, 并将中心向量的更新的学习率调整为0.001
-将损失函数中分类损失的权重调整为1,并去掉了生成器对抗损失前面的权重3
-'''
-
-
 import time
 import datetime as datetime
 from torch.autograd import Variable
@@ -145,7 +139,7 @@ class ExGAN():
                     if testAcc > best_accuracy:
                         best_accuracy = testAcc
                         # 获取当前日期
-                        current_date = datetime.now().strftime("%Y-%m%d")
+                        current_date = datetime.datetime.now().strftime("%Y-%m%d")
                         # 保存模型权重
                         torch.save(self.model.state_dict(), "saved_models/model_{}_{}_{}_weights.pth".format(self.model_name, self.task_name, current_date))
                         # 打开日志文件以记录训练信息
@@ -183,11 +177,6 @@ class ExGAN():
 
 
     def test(self, dataloader):
-        import time
-        import numpy as np
-        from torch.autograd import Variable
-        import torch
-
         time_open = time.time()
         running_corrects = 0
         numSample = 0
@@ -235,6 +224,8 @@ class ExGAN():
             if dataset_totals[i] > 0:
                 dataset_acc = 100.0 * dataset_corrects[i] / dataset_totals[i]
                 print("Dataset {} Acc: {:.4f}%".format(i + 1, dataset_acc))
+                # Log to W&B
+                wandb.log({f"Dataset_{i+1}_accuracy": dataset_acc})
 
         time_end = time.time() - time_open
         print("程序运行时间:{}分钟...".format(int(time_end / 60)))
