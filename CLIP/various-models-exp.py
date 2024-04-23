@@ -5,6 +5,7 @@
 
 
 import time
+from datetime import datetime
 from torch.autograd import Variable
 from torchvision import models
 import torch.nn as nn
@@ -17,22 +18,24 @@ from datasets import *
 
 
 
-torch.cuda.set_device(1)
+torch.cuda.set_device(0)
 
 
 class ClipModel(nn.Module):
-    def __init__(self, clip_model, c_dim, dim):
+    def __init__(self, clip_model, dim):
         super(ClipModel, self).__init__()
+        self.classifiers = []
         self.conv = clip_model.encode_image
-        self.classifier = nn.Sequential(nn.Linear(dim, c_dim),
-                                        nn.LogSoftmax(dim=1))
+        self.classifier = nn.Sequential(nn.Linear(dim, 18))
 
     def forward(self, x):
+        # print(ds)
         feature = self.conv(x).type(torch.float32)
         # print(feature.shape)
         # feature = feature.view(feature.size(0), -1)
         # print(feature.shape)
         out = self.classifier(feature)
+        
 
         return out
 
@@ -47,15 +50,12 @@ class ExGAN():
         self.channels = 3
         self.model_name = model_name
         self.task = 5
-        self.num_dim_list = [10, 100, 38, 101, 100, 10, 6]
-        self.task_list = ['mnist', 'cifar-100', 'leaf', 'food', 'dog', 'distraction', 'expression']
-        self.c_dim = self.num_dim_list[self.task]
-        self.task_name = self.task_list[self.task]
+        self.task_name = "CLIP"
 
         self.lr = 0.00005
         self.b1 = 0.5
         self.b2 = 0.999
-        self.log_write = open("./results/log_%s_%s_results_in.txt" % (self.model_name, self.task_name), "w")
+        self.log_write = open("./results/log_%s_results_in.txt" % (self.model_name), "w")
 
         self.img_shape = (self.channels, self.img_height, self.img_width)
         self.Tensor = torch.cuda.FloatTensor
@@ -66,16 +66,16 @@ class ExGAN():
         self.criterion_cls = torch.nn.CrossEntropyLoss().cuda()
 
         if model_name == "CLIP-16":
-            device = "cuda:1" if torch.cuda.is_available() else "cpu"
+            device = "cuda:0" if torch.cuda.is_available() else "cpu"
             clip_model, self.preprocess = clip.load('ViT-B/16', device)
             self.dim = 512
-            self.model = ClipModel(clip_model, self.c_dim, self.dim)
+            self.model = ClipModel(clip_model, self.dim)
 
         elif model_name == "CLIP-14":
-            device = "cuda:1" if torch.cuda.is_available() else "cpu"
+            device = "cuda:0" if torch.cuda.is_available() else "cpu"
             clip_model, self.preprocess = clip.load('ViT-L/14', device)
             self.dim = 768
-            self.model = ClipModel(clip_model, self.c_dim, self.dim)
+            self.model = ClipModel(clip_model, self.dim)
 
         self.model = self.model.cuda()
         total = sum([param.nelement() for param in self.model.parameters()])
@@ -85,7 +85,7 @@ class ExGAN():
         self.optimizer = torch.optim.Adam(self.model.parameters(), lr=self.lr, betas=(self.b1, self.b2))
         self.Transform = self.preprocess
 
-        self.dataloader, self.test_dataloader = get_data(self.Transform, self.batch_size, self.task_list, self.task)
+        self.dataloader, self.test_dataloader = get_data(self.Transform, self.batch_size)
 
 
 
@@ -104,11 +104,13 @@ class ExGAN():
             running_corrects = 0
             numSample = 0
 
-            for batch, (imgA, labelA) in enumerate(self.dataloader, 1):
-                X, y = imgA, labelA
+            for batch, (imgA, label, ds) in enumerate(self.dataloader, 1):
+                X, y = imgA, label
                 X, y = Variable(X.cuda()), Variable(y.cuda())
+                ds = ds.numpy()
                 numSample = numSample + y.size(0)
                 y_pred = self.model(X)
+                # print(y_pred.shape)
                 _, pred = torch.max(y_pred.data, 1)
 
                 self.optimizer.zero_grad()
@@ -151,8 +153,13 @@ class ExGAN():
             average_accuracy = average_accuracy + testAcc
             if testAcc > best_accuracy:
                 best_accuracy = testAcc
-                torch.save(self.model.state_dict(), "saved_models/model_%s_%s_weights.pth" % (self.model_name, self.task_name))
-                log_write_record = open("./results/log_%s_%s_train_record_in.txt" % (self.model_name, self.task_name), "w")
+                # 获取当前日期
+                current_date = datetime.now().strftime("%Y-%m%d")
+                # 保存模型权重
+                torch.save(self.model.state_dict(), "saved_models/model_{}_{}_{}_weights.pth".format(self.model_name, self.task_name, current_date))
+                # 打开日志文件以记录训练信息
+                log_write_record = open("./results/log_{}_{}_{}_train_record_in.txt".format(self.model_name, self.task_name, current_date), "w")
+
                 for r in range(len(vidx)):
                     log_write_record.write(str(vidx[r]) + "  " + str(vpred[r]) + "  " + str(vlable[r]) + "\n")
                 log_write_record.close()
@@ -172,9 +179,10 @@ class ExGAN():
         s_idx = 0
         v_idx, v_pred, v_label = [], [], []
 
-        for batch, (imgA, labelA) in enumerate(dataloader, 1):
-            X, y = imgA, labelA
+        for batch, (imgA, label, ds) in enumerate(dataloader, 1):
+            X, y = imgA, label
             X, y = Variable(X.cuda()), Variable(y.cuda())
+            ds = ds.numpy()
             numSample = numSample + y.size(0)
 
             y_pred = self.model(X)
@@ -182,10 +190,10 @@ class ExGAN():
             _, pred = torch.max(y_pred.data, 1)
             running_corrects += torch.sum(pred == y.data)
 
-            for k in range(len(labelA)):
+            for k in range(len(label)):
                 v_idx.append(s_idx)
                 v_pred.append(pred[k].item())
-                v_label.append(labelA[k].item())
+                v_label.append(label[k].item())
                 s_idx = s_idx + 1
 
             if batch % 100 == 0:
@@ -203,7 +211,7 @@ class ExGAN():
 
 
 def main():
-    models_list = ['CLIP-14', 'CLIP-16']
+    models_list = ['CLIP-16'] # 14大，16小
     for model in models_list:
         exgan = ExGAN(model)
         exgan.train()

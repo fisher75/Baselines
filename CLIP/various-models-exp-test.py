@@ -5,6 +5,7 @@
 
 
 import time
+import datetime as datetime
 from torch.autograd import Variable
 from torchvision import models
 import torch.nn as nn
@@ -13,46 +14,53 @@ import torchvision.transforms as transforms
 import timm
 import clip
 import torchvision.transforms as trans
-from datasets import *
+from datasetstest import *
+import wandb
 
 
+# 初始化W&B
+wandb.init(project="Baselines_CLIP")
+config = wandb.config  # 设置配置
+
+config.batch_size = 24
+config.n_epochs = 10
+config.learning_rate = 0.00005
 
 torch.cuda.set_device(0)
 
 
-class ViTModel(nn.Module):
-    def __init__(self, vit_model, dim):
-        super(ViTModel, self).__init__()
+class ClipModel(nn.Module):
+    def __init__(self, clip_model, dim):
+        super(ClipModel, self).__init__()
         self.classifiers = []
-        self.conv = vit_model
-        self.cls1 = nn.Sequential(nn.Linear(dim, 10))
-        self.classifiers.append(self.cls1)
-        self.cls2 = nn.Sequential(nn.Linear(dim, 6))
-        self.classifiers.append(self.cls2)
-        self.cls3 = nn.Sequential(nn.Linear(dim, 2))
-        self.classifiers.append(self.cls3)
+        self.conv = clip_model.encode_image
+        self.classifier = nn.Sequential(nn.Linear(dim, 18))
 
-    def forward(self, x, ds):
+    def forward(self, x):
+        # print(ds)
         feature = self.conv(x).type(torch.float32)
         # print(feature.shape)
         # feature = feature.view(feature.size(0), -1)
         # print(feature.shape)
-        out = self.classifiers[ds](feature)
+        out = self.classifier(feature)
+        
 
         return out
 
 
 class ExGAN():
-    def __init__(self):
+    def __init__(self, model_name):
         super(ExGAN, self).__init__()
-        self.batch_size = 24
-        self.n_epochs = 10
+        self.batch_size = config.batch_size
+        self.n_epochs = config.n_epochs
         self.img_height = 224
         self.img_width = 224
         self.channels = 3
-        self.model_name = "ViT"
+        self.model_name = model_name
+        self.task = 5
+        self.task_name = "CLIP"
 
-        self.lr = 0.00005
+        self.lr = config.learning_rate
         self.b1 = 0.5
         self.b2 = 0.999
         self.log_write = open("./results/log_%s_results_in.txt" % (self.model_name), "w")
@@ -65,11 +73,17 @@ class ExGAN():
         self.criterion_l2 = torch.nn.MSELoss().cuda()
         self.criterion_cls = torch.nn.CrossEntropyLoss().cuda()
 
-        ViT_model = timm.create_model("vit_tiny_patch16_224", pretrained=True,
-                                       num_classes=5)
-        ViT_model.head = nn.Sequential()
-        self.dim = 192
-        self.model = ViTModel(ViT_model, self.dim)
+        if model_name == "CLIP-16":
+            device = "cuda:0" if torch.cuda.is_available() else "cpu"
+            clip_model, self.preprocess = clip.load('ViT-B/16', device)
+            self.dim = 512
+            self.model = ClipModel(clip_model, self.dim)
+
+        elif model_name == "CLIP-14":
+            device = "cuda:0" if torch.cuda.is_available() else "cpu"
+            clip_model, self.preprocess = clip.load('ViT-L/14', device)
+            self.dim = 768
+            self.model = ClipModel(clip_model, self.dim)
 
         self.model = self.model.cuda()
         total = sum([param.nelement() for param in self.model.parameters()])
@@ -77,15 +91,11 @@ class ExGAN():
 
         # Optimizers
         self.optimizer = torch.optim.Adam(self.model.parameters(), lr=self.lr, betas=(self.b1, self.b2))
-        self.Transform = trans.Compose([
-            transforms.Resize(self.img_height),
-            transforms.CenterCrop(self.img_height),
-            transforms.ToTensor(),
-            transforms.Normalize(mean=[0.485, 0.456, 0.406],
-                                 std=[0.229, 0.224, 0.225])
-        ])
+        self.Transform = self.preprocess
 
         self.dataloader, self.test_dataloader = get_data(self.Transform, self.batch_size)
+
+
 
     def train(self):
         print('Train on the %s model' % self.model_name)
@@ -102,12 +112,14 @@ class ExGAN():
             running_corrects = 0
             numSample = 0
 
-            for batch, (imgA, labelA, ds) in enumerate(self.dataloader, 1):
-                X, y = imgA, labelA
+
+            for batch, (imgA, label, ds) in enumerate(self.dataloader, 1):
+                X, y = imgA, label
                 X, y = Variable(X.cuda()), Variable(y.cuda())
                 ds = ds.numpy()
                 numSample = numSample + y.size(0)
-                y_pred = self.model(X, ds)
+                y_pred = self.model(X)
+                # print(y_pred.shape)
                 _, pred = torch.max(y_pred.data, 1)
 
                 self.optimizer.zero_grad()
@@ -117,6 +129,8 @@ class ExGAN():
 
                 running_loss += loss.item()
                 running_corrects += torch.sum(pred == y.data)
+                
+                wandb.log({"train_loss": loss, "epoch": epoch})
 
                 if batch % 10 == 0:
                     print("Epoch {}/{}, Batch {}, Train Loss:{:.4f},Train ACC:{:.4f}%".format(
@@ -130,8 +144,12 @@ class ExGAN():
                     average_accuracy = average_accuracy + testAcc
                     if testAcc > best_accuracy:
                         best_accuracy = testAcc
-                        torch.save(self.model.state_dict(), "saved_models/model_%s_%s_weights.pth" % (self.model_name, self.task_name))
-                        log_write_record = open("./results/log_%s_%s_train_record_in.txt" % (self.model_name, self.task_name), "w")
+                        # 获取当前日期
+                        current_date = datetime.now().strftime("%Y-%m%d")
+                        # 保存模型权重
+                        torch.save(self.model.state_dict(), "saved_models/model_{}_{}_{}_weights.pth".format(self.model_name, self.task_name, current_date))
+                        # 打开日志文件以记录训练信息
+                        log_write_record = open("./results/log_{}_{}_{}_train_record_in.txt".format(self.model_name, self.task_name, current_date), "w")
                         for r in range(len(vidx)):
                             log_write_record.write(str(vidx[r]) + "  " + str(vpred[r]) + "  " + str(vlable[r]) + "\n")
                         log_write_record.close()
@@ -165,36 +183,58 @@ class ExGAN():
 
 
     def test(self, dataloader):
+        import time
+        import numpy as np
+        from torch.autograd import Variable
+        import torch
+
         time_open = time.time()
         running_corrects = 0
         numSample = 0
         s_idx = 0
         v_idx, v_pred, v_label = [], [], []
 
-        for batch, (imgA, labelA, ds) in enumerate(dataloader, 1):
-            X, y = imgA, labelA
+        # 新增记录每个数据集的准确统计
+        dataset_corrects = [0, 0, 0]
+        dataset_totals = [0, 0, 0]
+
+        for batch, (imgA, label, ds) in enumerate(dataloader, 1):
+            X, y = imgA, label
             X, y = Variable(X.cuda()), Variable(y.cuda())
             ds = ds.numpy()
-            numSample = numSample + y.size(0)
+            numSample += y.size(0)
 
-            y_pred = self.model(X, ds)
-
+            y_pred = self.model(X)
             _, pred = torch.max(y_pred.data, 1)
             running_corrects += torch.sum(pred == y.data)
 
-            for k in range(len(labelA)):
+            # 更新每个数据集的准确度统计
+            for k in range(len(label)):
+                dataset_index = ds[k]
+                dataset_totals[dataset_index] += 1
+                if pred[k] == label[k]:
+                    dataset_corrects[dataset_index] += 1
+
                 v_idx.append(s_idx)
                 v_pred.append(pred[k].item())
-                v_label.append(labelA[k].item())
-                s_idx = s_idx + 1
+                v_label.append(label[k].item())
+                s_idx += 1
 
             if batch % 100 == 0:
+                current_acc = 100.0 * running_corrects / numSample
                 print("Batch {}, Test ACC:{:.4f}%".format(
                     batch, 100.0 * running_corrects / numSample))
+                wandb.log({"batch_test_acc": current_acc, "batch": batch})  # Log to W&B
 
         epoch_acc = 100.0 * running_corrects.item() / numSample
-
         print("{} Acc:{:.4f}%".format('test', epoch_acc))
+        wandb.log({"test_accuracy": epoch_acc})  # Log to W&B
+
+        # 打印每个数据集的准确度
+        for i in range(3):
+            if dataset_totals[i] > 0:
+                dataset_acc = 100.0 * dataset_corrects[i] / dataset_totals[i]
+                print("Dataset {} Acc: {:.4f}%".format(i + 1, dataset_acc))
 
         time_end = time.time() - time_open
         print("程序运行时间:{}分钟...".format(int(time_end / 60)))
@@ -202,9 +242,12 @@ class ExGAN():
         return epoch_acc, v_idx, v_pred, v_label
 
 
+
 def main():
-    exgan = ExGAN()
-    exgan.train()
+    models_list = ['CLIP-16'] # 14大，16小
+    for model in models_list:
+        exgan = ExGAN(model)
+        exgan.train()
 
 if __name__ == "__main__":
     main()
