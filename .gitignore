@@ -1,1 +1,4 @@
 wandb/
+# *.pth
+# CLIP/saved_models/
+# ViT/saved_models/
