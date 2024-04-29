@@ -1,0 +1,106 @@
+wandb: Currently logged in as: haozhuangchi. Use `wandb login --relogin` to force relogin
+wandb: Tracking run with wandb version 0.16.6
+wandb: Run data is saved locally in /scratch/users/ntu/chih0001/model/baselines/CLIP/wandb/run-20240429_171753-0bqmo2ju
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run morning-paper-10
+wandb: ⭐️ View project at https://wandb.ai/haozhuangchi/Baselines_CLIP
+wandb: 🚀 View run at https://wandb.ai/haozhuangchi/Baselines_CLIP/runs/0bqmo2ju
+CLIP-16-Number of parameter: 0.0092M
+/home/users/ntu/chih0001/anaconda3/envs/llava/lib/python3.10/site-packages/sklearn/linear_model/_logistic.py:458: ConvergenceWarning: lbfgs failed to converge (status=1):
+STOP: TOTAL NO. of ITERATIONS REACHED LIMIT.
+
+Increase the number of iterations (max_iter) or scale the data as shown in:
+    https://scikit-learn.org/stable/modules/preprocessing.html
+Please also refer to the documentation for alternative solver options:
+    https://scikit-learn.org/stable/modules/linear_model.html#logistic-regression
+  n_iter_i = _check_optimize_result(
+Total Accuracy = 91.229%
+Accuracy for Dataset 1: 89.662%
+Accuracy for Dataset 2: 99.699%
+Accuracy for Dataset 3: 94.182%
+wandb: - 0.014 MB of 0.014 MB uploadedwandb: \ 0.014 MB of 0.014 MB uploadedwandb: | 0.014 MB of 0.014 MB uploadedwandb: / 0.014 MB of 0.014 MB uploadedwandb: - 0.014 MB of 0.014 MB uploadedwandb: \ 0.014 MB of 0.014 MB uploadedwandb: | 0.019 MB of 0.023 MB uploaded (0.003 MB deduped)wandb: / 0.019 MB of 0.023 MB uploaded (0.003 MB deduped)wandb: - 0.023 MB of 0.023 MB uploaded (0.003 MB deduped)wandb: 
+wandb: Run history:
+wandb: accuracy_dataset_1 ▁
+wandb: accuracy_dataset_2 ▁
+wandb: accuracy_dataset_3 ▁
+wandb:     total_accuracy ▁
+wandb: 
+wandb: Run summary:
+wandb: accuracy_dataset_1 89.66239
+wandb: accuracy_dataset_2 99.6988
+wandb: accuracy_dataset_3 94.1822
+wandb:     total_accuracy 91.22889
+wandb: 
+wandb: 🚀 View run morning-paper-10 at: https://wandb.ai/haozhuangchi/Baselines_CLIP/runs/0bqmo2ju
+wandb: ⭐️ View project at: https://wandb.ai/haozhuangchi/Baselines_CLIP
+wandb: Synced 5 W&B file(s), 0 media file(s), 2 artifact file(s) and 0 other file(s)
+wandb: Find logs at: ./wandb/run-20240429_171753-0bqmo2ju/logs
+ This problem is unconstrained.
+RUNNING THE L-BFGS-B CODE
+
+           * * *
+
+Machine precision = 2.220D-16
+ N =         9234     M =           10
+
+At X0         0 variables are exactly at the bounds
+
+At iterate    0    f=  2.43306D+05    |proj g|=  1.67014D+05
+
+At iterate   50    f=  2.36014D+04    |proj g|=  2.42346D+03
+
+At iterate  100    f=  1.72723D+04    |proj g|=  8.47619D+02
+
+At iterate  150    f=  1.49429D+04    |proj g|=  5.22559D+02
+
+At iterate  200    f=  1.40410D+04    |proj g|=  8.19572D+02
+
+At iterate  250    f=  1.35137D+04    |proj g|=  4.79554D+02
+
+At iterate  300    f=  1.32550D+04    |proj g|=  1.64057D+02
+
+At iterate  350    f=  1.31262D+04    |proj g|=  4.80889D+02
+
+At iterate  400    f=  1.30774D+04    |proj g|=  1.81250D+02
+
+At iterate  450    f=  1.30566D+04    |proj g|=  7.08069D+01
+
+At iterate  500    f=  1.30457D+04    |proj g|=  1.82319D+01
+
+At iterate  550    f=  1.30404D+04    |proj g|=  5.70325D+01
+
+At iterate  600    f=  1.30372D+04    |proj g|=  1.78253D+01
+
+At iterate  650    f=  1.30355D+04    |proj g|=  9.51623D+00
+
+At iterate  700    f=  1.30346D+04    |proj g|=  3.17689D+01
+
+At iterate  750    f=  1.30339D+04    |proj g|=  2.64091D+01
+
+At iterate  800    f=  1.30328D+04    |proj g|=  1.02681D+01
+
+At iterate  850    f=  1.30318D+04    |proj g|=  1.39676D+01
+
+At iterate  900    f=  1.30298D+04    |proj g|=  1.10975D+01
+
+At iterate  950    f=  1.30272D+04    |proj g|=  1.04248D+01
+
+At iterate 1000    f=  1.30240D+04    |proj g|=  6.83669D+01
+
+           * * *
+
+Tit   = total number of iterations
+Tnf   = total number of function evaluations
+Tnint = total number of segments explored during Cauchy searches
+Skip  = number of BFGS updates skipped
+Nact  = number of active bounds at final generalized Cauchy point
+Projg = norm of the final projected gradient
+F     = final function value
+
+           * * *
+
+   N    Tit     Tnf  Tnint  Skip  Nact     Projg        F
+ 9234   1000   1126      1     0     0   6.837D+01   1.302D+04
+  F =   13023.952351348014     
+
+STOP: TOTAL NO. of ITERATIONS REACHED LIMIT                 

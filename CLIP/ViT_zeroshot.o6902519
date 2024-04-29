@@ -1,0 +1,29 @@
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+			Resource Usage on 2024-04-29 17:30:44.755194:
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	JobId: 6902519.pbs101
+	Project: 12002486
+	Exit Status: 1
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	NCPUs: Requested(16), Used(16)
+	CPU Time Used: 00:00:28
+	Memory: Requested(110gb), Used(2300632kb)
+	Vmem Used: 97912932kb
+	Walltime: Requested(20:00:00), Used(00:02:37)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	Execution Nodes Used: (x1000c0s3b0n1:ngpus=1:ncpus=16:mem=115343360kb)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	GPU Duration: 2.64mins
+	GPU Energy Consumed: 48.74W
+	GPU Max GPU Memory Used: 450.0MB
+	Memory Throughput Rate (Average): x1000c0s3b0n1:(gpu1:0%)
+	Memory Throughput Rate (Max): x1000c0s3b0n1:(gpu1:0%)
+	Memory Throughput Rate (Min): x1000c0s3b0n1:(gpu1:0%)
+	GPU SM Utilization (Average): x1000c0s3b0n1:(gpu1:0%)
+	GPU SM Utilization (Max): x1000c0s3b0n1:(gpu1:0%)
+	GPU SM Utilization (Min): x1000c0s3b0n1:(gpu1:0%)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Warning: All GPUs have a percentage of 0 utilisation.
+GPU application profile: Idle
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+

@@ -1,5 +1,7 @@
 import time
 import datetime as datetime
+from sklearn.linear_model import LogisticRegression
+import numpy as np
 from torch.autograd import Variable
 from torchvision import models
 import torch.nn as nn
@@ -8,8 +10,10 @@ import torchvision.transforms as transforms
 import timm
 import clip
 import torchvision.transforms as trans
-from datasetstest import *
+from datasets import *
 import wandb
+from tqdm import tqdm
+
 
 
 # 初始化W&B
@@ -36,10 +40,10 @@ class ClipModel(nn.Module):
         # print(feature.shape)
         # feature = feature.view(feature.size(0), -1)
         # print(feature.shape)
-        out = self.classifier(feature)
+        # out = self.classifier(feature)
         
 
-        return out
+        return feature
 
 
 class ExGAN():
@@ -90,7 +94,54 @@ class ExGAN():
         self.dataloader, self.test_dataloader = get_data(self.Transform, self.batch_size)
 
 
+    def get_features(self, dataset):
+        all_features = []
+        all_labels = []
+        all_datasets = []  # 用于跟踪每个样本属于哪个数据集
 
+        with torch.no_grad():
+            for batch, (imgA, label, ds) in enumerate(dataset, 1):
+                X, y, ds = imgA.cuda(), label, ds
+                features = self.model(X)
+                all_features.append(features)
+                all_labels.append(y)
+                all_datasets.extend(ds)  # 直接添加数据集编号
+
+        return torch.cat(all_features).cpu().numpy(), torch.cat(all_labels).cpu().numpy(), all_datasets
+    
+    def zero_shot_test(self):
+        train_features, train_labels, _ = self.get_features(self.dataloader)  # 添加一个_来接收数据集编号
+        test_features, test_labels, test_datasets = self.get_features(self.test_dataloader)
+
+        # Perform logistic regression
+        classifier = LogisticRegression(random_state=0, C=0.316, max_iter=1000, verbose=1)
+        classifier.fit(train_features, train_labels)
+
+        # Evaluate using the logistic regression classifier
+        predictions = classifier.predict(test_features)
+        total_accuracy = np.mean((test_labels == predictions).astype(float)) * 100.
+        print(f"Total Accuracy = {total_accuracy:.3f}%")
+        wandb.log({"total_accuracy": total_accuracy})  # Log total accuracy to WandB
+
+        # Initialize dataset accuracy tracking
+        dataset_accuracies = [0, 0, 0]  # For three datasets
+        dataset_counts = [0, 0, 0]
+
+        # Iterate through predictions to compute per-dataset accuracy
+        for pred, label, dataset in zip(predictions, test_labels, test_datasets):
+            dataset_index = dataset  # Already an integer
+            dataset_counts[dataset_index] += 1
+            if pred == label:
+                dataset_accuracies[dataset_index] += 1
+
+        # Print and log dataset accuracies
+        for i in range(3):
+            if dataset_counts[i] > 0:
+                acc = (dataset_accuracies[i] / dataset_counts[i]) * 100
+                print(f"Accuracy for Dataset {i+1}: {acc:.3f}%")
+                wandb.log({f"accuracy_dataset_{i+1}": acc})
+
+    
     def train(self):
         print('Train on the %s model' % self.model_name)
         time_open = time.time()
@@ -238,7 +289,7 @@ def main():
     models_list = ['CLIP-16'] # 14大，16小
     for model in models_list:
         exgan = ExGAN(model)
-        exgan.train()
+        exgan.zero_shot_test()
 
 if __name__ == "__main__":
     main()

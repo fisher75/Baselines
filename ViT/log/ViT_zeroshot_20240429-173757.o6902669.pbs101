@@ -1,0 +1,165 @@
+wandb: Currently logged in as: haozhuangchi. Use `wandb login --relogin` to force relogin
+wandb: Tracking run with wandb version 0.16.6
+wandb: Run data is saved locally in /scratch/users/ntu/chih0001/model/baselines/ViT/wandb/run-20240429_173855-9f7v21ey
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run breezy-sponge-23
+wandb: ⭐️ View project at https://wandb.ai/haozhuangchi/Baselines_ViT
+wandb: 🚀 View run at https://wandb.ai/haozhuangchi/Baselines_ViT/runs/9f7v21ey
+vit_tiny_patch16_224-Number of parameter: 5.5279M
+/home/users/ntu/chih0001/anaconda3/envs/llava/lib/python3.10/site-packages/sklearn/linear_model/_logistic.py:458: ConvergenceWarning: lbfgs failed to converge (status=1):
+STOP: TOTAL NO. of ITERATIONS REACHED LIMIT.
+
+Increase the number of iterations (max_iter) or scale the data as shown in:
+    https://scikit-learn.org/stable/modules/preprocessing.html
+Please also refer to the documentation for alternative solver options:
+    https://scikit-learn.org/stable/modules/linear_model.html#logistic-regression
+  n_iter_i = _check_optimize_result(
+Total Accuracy = 59.522%
+Accuracy for Dataset 1: 55.113%
+Accuracy for Dataset 2: 47.289%
+Accuracy for Dataset 3: 69.633%
+Zero-shot Testing:   0%|          | 0/889 [00:00<?, ?it/s]Zero-shot Testing:   0%|          | 1/889 [00:00<08:12,  1.80it/s]Zero-shot Testing:   1%|          | 9/889 [00:00<00:58, 14.96it/s]Zero-shot Testing:   2%|▏         | 17/889 [00:00<00:39, 22.25it/s]Zero-shot Testing:   3%|▎         | 25/889 [00:01<00:32, 26.63it/s]Zero-shot Testing:   4%|▎         | 33/889 [00:01<00:28, 29.64it/s]Zero-shot Testing:   5%|▍         | 41/889 [00:01<00:27, 31.04it/s]Zero-shot Testing:   6%|▌         | 49/889 [00:01<00:25, 33.27it/s]Zero-shot Testing:   6%|▋         | 57/889 [00:02<00:24, 33.55it/s]Zero-shot Testing:   7%|▋         | 65/889 [00:02<00:24, 34.02it/s]Zero-shot Testing:   8%|▊         | 73/889 [00:02<00:24, 33.43it/s]Zero-shot Testing:   9%|▉         | 81/889 [00:02<00:23, 34.91it/s]Zero-shot Testing:  10%|█         | 89/889 [00:02<00:22, 35.57it/s]Zero-shot Testing:  11%|█         | 97/889 [00:03<00:22, 35.13it/s]Zero-shot Testing:  12%|█▏        | 105/889 [00:03<00:21, 36.22it/s]Zero-shot Testing:  13%|█▎        | 113/889 [00:03<00:22, 34.93it/s]Zero-shot Testing:  14%|█▎        | 121/889 [00:03<00:22, 34.36it/s]Zero-shot Testing:  15%|█▍        | 129/889 [00:04<00:22, 33.23it/s]Zero-shot Testing:  15%|█▌        | 137/889 [00:04<00:22, 33.50it/s]Zero-shot Testing:  16%|█▋        | 145/889 [00:04<00:21, 34.64it/s]Zero-shot Testing:  17%|█▋        | 153/889 [00:04<00:21, 34.33it/s]Zero-shot Testing:  18%|█▊        | 161/889 [00:05<00:20, 35.68it/s]Zero-shot Testing:  19%|█▉        | 169/889 [00:05<00:21, 34.22it/s]Zero-shot Testing:  20%|█▉        | 177/889 [00:05<00:20, 35.52it/s]Zero-shot Testing:  21%|██        | 185/889 [00:05<00:19, 36.93it/s]Zero-shot Testing:  22%|██▏       | 193/889 [00:05<00:18, 36.97it/s]Zero-shot Testing:  23%|██▎       | 201/889 [00:06<00:19, 35.89it/s]Zero-shot Testing:  24%|██▎       | 209/889 [00:06<00:19, 35.11it/s]Zero-shot Testing:  24%|██▍       | 217/889 [00:06<00:19, 34.56it/s]Zero-shot Testing:  25%|██▌       | 225/889 [00:06<00:19, 33.91it/s]Zero-shot Testing:  26%|██▌       | 233/889 [00:07<00:18, 35.83it/s]Zero-shot Testing:  27%|██▋       | 241/889 [00:07<00:17, 36.38it/s]Zero-shot Testing:  28%|██▊       | 249/889 [00:07<00:17, 36.02it/s]Zero-shot Testing:  29%|██▉       | 257/889 [00:07<00:17, 36.54it/s]Zero-shot Testing:  30%|██▉       | 265/889 [00:07<00:17, 36.47it/s]Zero-shot Testing:  31%|███       | 273/889 [00:08<00:16, 36.25it/s]Zero-shot Testing:  32%|███▏      | 281/889 [00:08<00:16, 35.79it/s]Zero-shot Testing:  33%|███▎      | 289/889 [00:08<00:17, 35.02it/s]Zero-shot Testing:  33%|███▎      | 297/889 [00:08<00:16, 35.25it/s]Zero-shot Testing:  34%|███▍      | 305/889 [00:09<00:16, 35.08it/s]Zero-shot Testing:  35%|███▌      | 313/889 [00:09<00:16, 35.85it/s]Zero-shot Testing:  36%|███▌      | 321/889 [00:09<00:15, 35.77it/s]Zero-shot Testing:  37%|███▋      | 329/889 [00:09<00:15, 36.68it/s]Zero-shot Testing:  38%|███▊      | 337/889 [00:09<00:14, 38.66it/s]Zero-shot Testing:  38%|███▊      | 341/889 [00:10<00:14, 37.52it/s]Zero-shot Testing:  39%|███▉      | 345/889 [00:10<00:14, 36.95it/s]Zero-shot Testing:  40%|███▉      | 353/889 [00:10<00:14, 37.09it/s]Zero-shot Testing:  41%|████      | 361/889 [00:10<00:14, 35.88it/s]Zero-shot Testing:  42%|████▏     | 369/889 [00:10<00:14, 35.78it/s]Zero-shot Testing:  42%|████▏     | 377/889 [00:11<00:14, 35.15it/s]Zero-shot Testing:  43%|████▎     | 385/889 [00:11<00:14, 35.97it/s]Zero-shot Testing:  44%|████▍     | 393/889 [00:11<00:14, 35.10it/s]Zero-shot Testing:  45%|████▌     | 401/889 [00:11<00:13, 35.09it/s]Zero-shot Testing:  46%|████▌     | 409/889 [00:12<00:17, 28.11it/s]Zero-shot Testing:  47%|████▋     | 417/889 [00:12<00:15, 30.78it/s]Zero-shot Testing:  48%|████▊     | 425/889 [00:12<00:14, 32.31it/s]Zero-shot Testing:  48%|████▊     | 430/889 [00:12<00:13, 34.89it/s]Zero-shot Testing:  49%|████▉     | 434/889 [00:12<00:13, 33.43it/s]Zero-shot Testing:  50%|████▉     | 441/889 [00:13<00:14, 31.38it/s]Zero-shot Testing:  51%|█████     | 449/889 [00:13<00:13, 33.56it/s]Zero-shot Testing:  51%|█████▏    | 457/889 [00:13<00:12, 35.77it/s]Zero-shot Testing:  52%|█████▏    | 461/889 [00:13<00:12, 35.66it/s]Zero-shot Testing:  53%|█████▎    | 467/889 [00:13<00:13, 32.11it/s]Zero-shot Testing:  53%|█████▎    | 475/889 [00:14<00:12, 33.22it/s]Zero-shot Testing:  54%|█████▍    | 483/889 [00:14<00:12, 32.96it/s]Zero-shot Testing:  55%|█████▌    | 491/889 [00:14<00:11, 33.84it/s]Zero-shot Testing:  56%|█████▌    | 499/889 [00:14<00:11, 34.22it/s]Zero-shot Testing:  57%|█████▋    | 507/889 [00:14<00:10, 34.99it/s]Zero-shot Testing:  58%|█████▊    | 515/889 [00:15<00:10, 34.51it/s]Zero-shot Testing:  59%|█████▉    | 523/889 [00:15<00:10, 35.19it/s]Zero-shot Testing:  60%|█████▉    | 531/889 [00:15<00:10, 34.56it/s]Zero-shot Testing:  61%|██████    | 539/889 [00:15<00:09, 35.45it/s]Zero-shot Testing:  62%|██████▏   | 547/889 [00:16<00:09, 35.97it/s]Zero-shot Testing:  62%|██████▏   | 555/889 [00:16<00:08, 38.13it/s]Zero-shot Testing:  63%|██████▎   | 563/889 [00:16<00:08, 37.16it/s]Zero-shot Testing:  64%|██████▍   | 571/889 [00:16<00:08, 37.65it/s]Zero-shot Testing:  65%|██████▌   | 579/889 [00:16<00:08, 36.98it/s]Zero-shot Testing:  66%|██████▌   | 587/889 [00:17<00:07, 38.30it/s]Zero-shot Testing:  67%|██████▋   | 595/889 [00:17<00:08, 36.37it/s]Zero-shot Testing:  68%|██████▊   | 603/889 [00:17<00:07, 36.27it/s]Zero-shot Testing:  69%|██████▊   | 611/889 [00:17<00:07, 36.53it/s]Zero-shot Testing:  70%|██████▉   | 619/889 [00:18<00:07, 35.75it/s]Zero-shot Testing:  71%|███████   | 627/889 [00:18<00:07, 35.14it/s]Zero-shot Testing:  71%|███████▏  | 635/889 [00:18<00:07, 35.19it/s]Zero-shot Testing:  72%|███████▏  | 643/889 [00:18<00:07, 34.88it/s]Zero-shot Testing:  73%|███████▎  | 651/889 [00:19<00:06, 34.59it/s]Zero-shot Testing:  74%|███████▍  | 659/889 [00:19<00:06, 34.28it/s]Zero-shot Testing:  75%|███████▌  | 667/889 [00:19<00:06, 34.67it/s]Zero-shot Testing:  76%|███████▌  | 675/889 [00:19<00:06, 35.64it/s]Zero-shot Testing:  77%|███████▋  | 683/889 [00:19<00:05, 37.26it/s]Zero-shot Testing:  78%|███████▊  | 691/889 [00:20<00:05, 36.03it/s]Zero-shot Testing:  79%|███████▊  | 699/889 [00:20<00:05, 36.88it/s]Zero-shot Testing:  80%|███████▉  | 707/889 [00:20<00:04, 37.19it/s]Zero-shot Testing:  80%|████████  | 715/889 [00:20<00:04, 36.84it/s]Zero-shot Testing:  81%|████████▏ | 723/889 [00:21<00:04, 34.29it/s]Zero-shot Testing:  82%|████████▏ | 731/889 [00:21<00:04, 34.89it/s]Zero-shot Testing:  83%|████████▎ | 739/889 [00:21<00:04, 33.82it/s]Zero-shot Testing:  84%|████████▍ | 747/889 [00:21<00:04, 35.14it/s]Zero-shot Testing:  85%|████████▍ | 755/889 [00:21<00:03, 35.55it/s]Zero-shot Testing:  86%|████████▌ | 763/889 [00:22<00:03, 34.96it/s]Zero-shot Testing:  87%|████████▋ | 771/889 [00:22<00:03, 35.65it/s]Zero-shot Testing:  88%|████████▊ | 779/889 [00:22<00:03, 35.54it/s]Zero-shot Testing:  89%|████████▊ | 787/889 [00:22<00:02, 35.53it/s]Zero-shot Testing:  89%|████████▉ | 795/889 [00:23<00:02, 34.83it/s]Zero-shot Testing:  90%|█████████ | 803/889 [00:23<00:02, 34.36it/s]Zero-shot Testing:  91%|█████████ | 811/889 [00:23<00:02, 34.61it/s]Zero-shot Testing:  92%|█████████▏| 819/889 [00:23<00:02, 34.24it/s]Zero-shot Testing:  93%|█████████▎| 827/889 [00:24<00:01, 34.02it/s]Zero-shot Testing:  94%|█████████▍| 835/889 [00:24<00:01, 34.98it/s]Zero-shot Testing:  95%|█████████▍| 843/889 [00:24<00:01, 33.79it/s]Zero-shot Testing:  96%|█████████▌| 851/889 [00:24<00:01, 34.75it/s]Zero-shot Testing:  97%|█████████▋| 859/889 [00:24<00:00, 34.18it/s]Zero-shot Testing:  98%|█████████▊| 867/889 [00:25<00:00, 35.28it/s]Zero-shot Testing:  98%|█████████▊| 875/889 [00:25<00:00, 36.65it/s]Zero-shot Testing:  99%|█████████▉| 883/889 [00:25<00:00, 36.17it/s]Zero-shot Testing: 100%|██████████| 889/889 [00:25<00:00, 34.71it/s]
+wandb: - 0.014 MB of 0.014 MB uploadedwandb: \ 0.014 MB of 0.014 MB uploadedwandb: | 0.014 MB of 0.014 MB uploadedwandb: / 0.014 MB of 0.014 MB uploadedwandb: - 0.014 MB of 0.014 MB uploadedwandb: \ 0.019 MB of 0.026 MB uploaded (0.003 MB deduped)wandb: | 0.028 MB of 0.028 MB uploaded (0.003 MB deduped)wandb: 
+wandb: Run history:
+wandb: accuracy_dataset_1 ▁
+wandb: accuracy_dataset_2 ▁
+wandb: accuracy_dataset_3 ▁
+wandb:     total_accuracy ▁
+wandb: 
+wandb: Run summary:
+wandb: accuracy_dataset_1 55.113
+wandb: accuracy_dataset_2 47.28916
+wandb: accuracy_dataset_3 69.63319
+wandb:     total_accuracy 59.52158
+wandb: 
+wandb: 🚀 View run breezy-sponge-23 at: https://wandb.ai/haozhuangchi/Baselines_ViT/runs/9f7v21ey
+wandb: ⭐️ View project at: https://wandb.ai/haozhuangchi/Baselines_ViT
+wandb: Synced 6 W&B file(s), 0 media file(s), 2 artifact file(s) and 0 other file(s)
+wandb: Find logs at: ./wandb/run-20240429_173855-9f7v21ey/logs
+Exception in thread NetStatThr:
+Traceback (most recent call last):
+  File "/home/users/ntu/chih0001/anaconda3/envs/llava/lib/python3.10/threading.py", line 1016, in _bootstrap_inner
+Exception in thread IntMsgThr:
+Traceback (most recent call last):
+  File "/home/users/ntu/chih0001/anaconda3/envs/llava/lib/python3.10/threading.py", line 1016, in _bootstrap_inner
+    self.run()
+  File "/home/users/ntu/chih0001/anaconda3/envs/llava/lib/python3.10/threading.py", line 953, in run
+    self.run()
+  File "/home/users/ntu/chih0001/anaconda3/envs/llava/lib/python3.10/threading.py", line 953, in run
+    self._target(*self._args, **self._kwargs)
+  File "/home/users/ntu/chih0001/anaconda3/envs/llava/lib/python3.10/site-packages/wandb/sdk/wandb_run.py", line 268, in check_network_status
+    self._target(*self._args, **self._kwargs)
+  File "/home/users/ntu/chih0001/anaconda3/envs/llava/lib/python3.10/site-packages/wandb/sdk/wandb_run.py", line 300, in check_internal_messages
+    self._loop_check_status(
+  File "/home/users/ntu/chih0001/anaconda3/envs/llava/lib/python3.10/site-packages/wandb/sdk/wandb_run.py", line 224, in _loop_check_status
+    self._loop_check_status(
+  File "/home/users/ntu/chih0001/anaconda3/envs/llava/lib/python3.10/site-packages/wandb/sdk/wandb_run.py", line 224, in _loop_check_status
+    local_handle = request()
+  File "/home/users/ntu/chih0001/anaconda3/envs/llava/lib/python3.10/site-packages/wandb/sdk/interface/interface.py", line 856, in deliver_internal_messages
+    local_handle = request()
+  File "/home/users/ntu/chih0001/anaconda3/envs/llava/lib/python3.10/site-packages/wandb/sdk/interface/interface.py", line 848, in deliver_network_status
+    return self._deliver_internal_messages(internal_message)
+  File "/home/users/ntu/chih0001/anaconda3/envs/llava/lib/python3.10/site-packages/wandb/sdk/interface/interface_shared.py", line 516, in _deliver_internal_messages
+    return self._deliver_network_status(status)
+  File "/home/users/ntu/chih0001/anaconda3/envs/llava/lib/python3.10/site-packages/wandb/sdk/interface/interface_shared.py", line 510, in _deliver_network_status
+    return self._deliver_record(record)
+  File "/home/users/ntu/chih0001/anaconda3/envs/llava/lib/python3.10/site-packages/wandb/sdk/interface/interface_shared.py", line 459, in _deliver_record
+    handle = mailbox._deliver_record(record, interface=self)
+  File "/home/users/ntu/chih0001/anaconda3/envs/llava/lib/python3.10/site-packages/wandb/sdk/lib/mailbox.py", line 455, in _deliver_record
+    return self._deliver_record(record)
+  File "/home/users/ntu/chih0001/anaconda3/envs/llava/lib/python3.10/site-packages/wandb/sdk/interface/interface_shared.py", line 459, in _deliver_record
+    handle = mailbox._deliver_record(record, interface=self)
+  File "/home/users/ntu/chih0001/anaconda3/envs/llava/lib/python3.10/site-packages/wandb/sdk/lib/mailbox.py", line 455, in _deliver_record
+    interface._publish(record)
+  File "/home/users/ntu/chih0001/anaconda3/envs/llava/lib/python3.10/site-packages/wandb/sdk/interface/interface_sock.py", line 51, in _publish
+    interface._publish(record)
+    self._sock_client.send_record_publish(record)  File "/home/users/ntu/chih0001/anaconda3/envs/llava/lib/python3.10/site-packages/wandb/sdk/interface/interface_sock.py", line 51, in _publish
+
+  File "/home/users/ntu/chih0001/anaconda3/envs/llava/lib/python3.10/site-packages/wandb/sdk/lib/sock_client.py", line 221, in send_record_publish
+    self._sock_client.send_record_publish(record)
+  File "/home/users/ntu/chih0001/anaconda3/envs/llava/lib/python3.10/site-packages/wandb/sdk/lib/sock_client.py", line 221, in send_record_publish
+    self.send_server_request(server_req)
+  File "/home/users/ntu/chih0001/anaconda3/envs/llava/lib/python3.10/site-packages/wandb/sdk/lib/sock_client.py", line 155, in send_server_request
+    self.send_server_request(server_req)
+  File "/home/users/ntu/chih0001/anaconda3/envs/llava/lib/python3.10/site-packages/wandb/sdk/lib/sock_client.py", line 155, in send_server_request
+    self._send_message(msg)
+  File "/home/users/ntu/chih0001/anaconda3/envs/llava/lib/python3.10/site-packages/wandb/sdk/lib/sock_client.py", line 152, in _send_message
+    self._sendall_with_error_handle(header + data)
+  File "/home/users/ntu/chih0001/anaconda3/envs/llava/lib/python3.10/site-packages/wandb/sdk/lib/sock_client.py", line 130, in _sendall_with_error_handle
+    self._send_message(msg)
+  File "/home/users/ntu/chih0001/anaconda3/envs/llava/lib/python3.10/site-packages/wandb/sdk/lib/sock_client.py", line 152, in _send_message
+    self._sendall_with_error_handle(header + data)
+  File "/home/users/ntu/chih0001/anaconda3/envs/llava/lib/python3.10/site-packages/wandb/sdk/lib/sock_client.py", line 130, in _sendall_with_error_handle
+    sent = self._sock.send(data)
+BrokenPipeError: [Errno 32] Broken pipe
+    sent = self._sock.send(data)
+BrokenPipeError: [Errno 32] Broken pipe
+ This problem is unconstrained.
+RUNNING THE L-BFGS-B CODE
+
+           * * *
+
+Machine precision = 2.220D-16
+ N =          342     M =           10
+
+At X0         0 variables are exactly at the bounds
+
+At iterate    0    f=  2.43306D+05    |proj g|=  1.12180D+05
+
+At iterate   50    f=  6.42566D+04    |proj g|=  6.47515D+02
+
+At iterate  100    f=  6.33808D+04    |proj g|=  5.01274D+02
+
+At iterate  150    f=  6.27358D+04    |proj g|=  8.92499D+02
+
+At iterate  200    f=  6.24024D+04    |proj g|=  1.39409D+02
+
+At iterate  250    f=  6.22209D+04    |proj g|=  4.28822D+02
+
+At iterate  300    f=  6.21505D+04    |proj g|=  1.12303D+02
+
+At iterate  350    f=  6.20980D+04    |proj g|=  8.32091D+01
+
+At iterate  400    f=  6.20536D+04    |proj g|=  1.01764D+02
+
+At iterate  450    f=  6.20270D+04    |proj g|=  1.47013D+02
+
+At iterate  500    f=  6.20170D+04    |proj g|=  1.31143D+02
+
+At iterate  550    f=  6.20100D+04    |proj g|=  4.50766D+01
+
+At iterate  600    f=  6.20024D+04    |proj g|=  1.39508D+02
+
+At iterate  650    f=  6.19981D+04    |proj g|=  2.70991D+01
+
+At iterate  700    f=  6.19938D+04    |proj g|=  3.30910D+01
+
+At iterate  750    f=  6.19887D+04    |proj g|=  2.75996D+01
+
+At iterate  800    f=  6.19862D+04    |proj g|=  2.38592D+01
+
+At iterate  850    f=  6.19847D+04    |proj g|=  1.29835D+01
+
+At iterate  900    f=  6.19828D+04    |proj g|=  1.41962D+01
+
+At iterate  950    f=  6.19817D+04    |proj g|=  5.40707D+01
+
+At iterate 1000    f=  6.19804D+04    |proj g|=  2.74367D+01
+
+           * * *
+
+Tit   = total number of iterations
+Tnf   = total number of function evaluations
+Tnint = total number of segments explored during Cauchy searches
+Skip  = number of BFGS updates skipped
+Nact  = number of active bounds at final generalized Cauchy point
+Projg = norm of the final projected gradient
+F     = final function value
+
+           * * *
+
+   N    Tit     Tnf  Tnint  Skip  Nact     Projg        F
+  342   1000   1101      1     0     0   2.744D+01   6.198D+04
+  F =   61980.415624831650     
+
+STOP: TOTAL NO. of ITERATIONS REACHED LIMIT                 

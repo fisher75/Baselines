@@ -1,0 +1,50 @@
+/var/spool/pbs/mom_priv/jobs/6902447.pbs101.SC: line 29: /home/users/ntu/chih0001/scratch/model/baselines/CLIP/log/CLIP_train_20240429-170706.o6902447.pbs101: No such file or directory
+wandb: Currently logged in as: haozhuangchi. Use `wandb login --relogin` to force relogin
+wandb: Tracking run with wandb version 0.16.6
+wandb: Run data is saved locally in /scratch/users/ntu/chih0001/model/baselines/CLIP/wandb/run-20240429_170747-s4xngtsp
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run apricot-plant-9
+wandb: ⭐️ View project at https://wandb.ai/haozhuangchi/Baselines_CLIP
+wandb: 🚀 View run at https://wandb.ai/haozhuangchi/Baselines_CLIP/runs/s4xngtsp
+CLIP-16-Number of parameter: 0.0092M
+Traceback (most recent call last):
+  File "/scratch/users/ntu/chih0001/model/baselines/CLIP/CLIP_zeroshot.py", line 294, in <module>
+    main()
+  File "/scratch/users/ntu/chih0001/model/baselines/CLIP/CLIP_zeroshot.py", line 291, in main
+    exgan.zero_shot_test()
+  File "/scratch/users/ntu/chih0001/model/baselines/CLIP/CLIP_zeroshot.py", line 113, in zero_shot_test
+    train_features, train_labels = self.get_features(self.dataloader)
+ValueError: too many values to unpack (expected 2)
+wandb: - 0.014 MB of 0.014 MB uploadedwandb: \ 0.014 MB of 0.014 MB uploadedwandb: | 0.014 MB of 0.014 MB uploadedwandb: / 0.014 MB of 0.014 MB uploadedwandb: - 0.014 MB of 0.014 MB uploadedwandb: \ 0.014 MB of 0.014 MB uploadedwandb: | 0.018 MB of 0.027 MB uploadedwandb: / 0.018 MB of 0.027 MB uploadedwandb: - 0.027 MB of 0.027 MB uploadedwandb: 🚀 View run apricot-plant-9 at: https://wandb.ai/haozhuangchi/Baselines_CLIP/runs/s4xngtsp
+wandb: ⭐️ View project at: https://wandb.ai/haozhuangchi/Baselines_CLIP
+wandb: Synced 6 W&B file(s), 0 media file(s), 2 artifact file(s) and 0 other file(s)
+wandb: Find logs at: ./wandb/run-20240429_170747-s4xngtsp/logs
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+			Resource Usage on 2024-04-29 17:12:56.309081:
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	JobId: 6902447.pbs101
+	Project: 12002486
+	Exit Status: 1
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	NCPUs: Requested(16), Used(16)
+	CPU Time Used: 00:16:47
+	Memory: Requested(110gb), Used(67210556kb)
+	Vmem Used: 108473388kb
+	Walltime: Requested(20:00:00), Used(00:05:53)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	Execution Nodes Used: (x1000c0s2b0n1:ngpus=1:ncpus=16:mem=115343360kb)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	GPU Duration: 5.91mins
+	GPU Energy Consumed: 102.39W
+	GPU Max GPU Memory Used: 1.38GB
+	Memory Throughput Rate (Average): x1000c0s2b0n1:(gpu2:4%)
+	Memory Throughput Rate (Max): x1000c0s2b0n1:(gpu2:22%)
+	Memory Throughput Rate (Min): x1000c0s2b0n1:(gpu2:0%)
+	GPU SM Utilization (Average): x1000c0s2b0n1:(gpu2:5%)
+	GPU SM Utilization (Max): x1000c0s2b0n1:(gpu2:48%)
+	GPU SM Utilization (Min): x1000c0s2b0n1:(gpu2:0%)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Warning: None
+GPU application profile: Low
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
