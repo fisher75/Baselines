@@ -1,0 +1,35 @@
+wandb: Currently logged in as: haozhuangchi. Use `wandb login --relogin` to force relogin
+wandb: Tracking run with wandb version 0.16.6
+wandb: Run data is saved locally in /scratch/users/ntu/chih0001/model/baselines/ViT/wandb/run-20240507_192245-danyev5g
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run twilight-frog-12
+wandb: ⭐️ View project at https://wandb.ai/haozhuangchi/Baselines_CNN
+wandb: 🚀 View run at https://wandb.ai/haozhuangchi/Baselines_CNN/runs/danyev5g
+/home/users/ntu/chih0001/anaconda3/envs/llava/lib/python3.10/site-packages/torchvision/models/_utils.py:208: UserWarning: The parameter 'pretrained' is deprecated since 0.13 and may be removed in the future, please use 'weights' instead.
+  warnings.warn(
+/home/users/ntu/chih0001/anaconda3/envs/llava/lib/python3.10/site-packages/torchvision/models/_utils.py:223: UserWarning: Arguments other than a weight enum or `None` for 'weights' are deprecated since 0.13 and may be removed in the future. The current behavior is equivalent to passing `weights=ResNet18_Weights.IMAGENET1K_V1`. You can also use `weights=ResNet18_Weights.DEFAULT` to get the most up-to-date weights.
+  warnings.warn(msg)
+vit_tiny_patch16_224-Number of parameter: 11.7075M
+Train on the vit_tiny_patch16_224 model
+----------
+Training...
+Epoch 0/9, Batch 10, Train Loss:122.4702,Train ACC:67.3438%
+Epoch 0/9, Batch 20, Train Loss:95.3176,Train ACC:74.4922%
+Epoch 0/9, Batch 30, Train Loss:80.8476,Train ACC:78.5417%
+Epoch 0/9, Batch 40, Train Loss:70.1946,Train ACC:81.3672%
+Epoch 0/9, Batch 50, Train Loss:61.9808,Train ACC:83.5000%
+Epoch 0/9, Batch 60, Train Loss:55.6705,Train ACC:85.2083%
+Epoch 0/9, Batch 70, Train Loss:50.8507,Train ACC:86.4732%
+Epoch 0/9, Batch 80, Train Loss:47.6281,Train ACC:87.3340%
+Epoch 0/9, Batch 90, Train Loss:44.7014,Train ACC:88.1163%
+Epoch 0/9, Batch 100, Train Loss:41.6461,Train ACC:88.9688%
+Epoch 0/9, Batch 110, Train Loss:39.2413,Train ACC:89.6307%
+Epoch 0/9, Batch 120, Train Loss:37.2812,Train ACC:90.1693%
+Epoch 0/9, Batch 130, Train Loss:35.8168,Train ACC:90.4928%
+Epoch 0/9, Batch 140, Train Loss:34.2707,Train ACC:90.9208%
+Epoch 0/9, Batch 150, Train Loss:32.9429,Train ACC:91.2604%
+Epoch 0/9, Batch 160, Train Loss:31.6878,Train ACC:91.5771%
+Epoch 0/9, Batch 170, Train Loss:30.5053,Train ACC:91.9026%
+Epoch 0/9, Batch 180, Train Loss:29.3727,Train ACC:92.1875%
+Epoch 0/9, Batch 190, Train Loss:28.4294,Train ACC:92.4465%
+Epoch 0/9, Batch 200, Train Loss:27.4855,Train ACC:92.6875%

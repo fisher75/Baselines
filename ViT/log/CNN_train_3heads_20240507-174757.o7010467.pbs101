@@ -1,0 +1,45 @@
+wandb: Currently logged in as: haozhuangchi. Use `wandb login --relogin` to force relogin
+wandb: Tracking run with wandb version 0.16.6
+wandb: Run data is saved locally in /scratch/users/ntu/chih0001/model/baselines/ViT/wandb/run-20240507_174827-a3nlpcyd
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run visionary-rain-9
+wandb: ⭐️ View project at https://wandb.ai/haozhuangchi/Baselines_CNN
+wandb: 🚀 View run at https://wandb.ai/haozhuangchi/Baselines_CNN/runs/a3nlpcyd
+/home/users/ntu/chih0001/anaconda3/envs/llava/lib/python3.10/site-packages/torchvision/models/_utils.py:208: UserWarning: The parameter 'pretrained' is deprecated since 0.13 and may be removed in the future, please use 'weights' instead.
+  warnings.warn(
+/home/users/ntu/chih0001/anaconda3/envs/llava/lib/python3.10/site-packages/torchvision/models/_utils.py:223: UserWarning: Arguments other than a weight enum or `None` for 'weights' are deprecated since 0.13 and may be removed in the future. The current behavior is equivalent to passing `weights=ResNet18_Weights.IMAGENET1K_V1`. You can also use `weights=ResNet18_Weights.DEFAULT` to get the most up-to-date weights.
+  warnings.warn(msg)
+vit_tiny_patch16_224-Number of parameter: 11.6987M
+Train on the vit_tiny_patch16_224 model
+----------
+Training...
+Traceback (most recent call last):
+  File "/scratch/users/ntu/chih0001/model/baselines/ViT/CNN_train_3heads.py", line 255, in <module>
+    main()
+  File "/scratch/users/ntu/chih0001/model/baselines/ViT/CNN_train_3heads.py", line 252, in main
+    exgan.train()
+  File "/scratch/users/ntu/chih0001/model/baselines/ViT/CNN_train_3heads.py", line 134, in train
+    pred, loss = self.model(X, ds, y)
+  File "/home/users/ntu/chih0001/anaconda3/envs/llava/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1518, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/home/users/ntu/chih0001/anaconda3/envs/llava/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1527, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/scratch/users/ntu/chih0001/model/baselines/ViT/CNN_train_3heads.py", line 46, in forward
+    out = self.classifiers[d](feature[i].unsqueeze(0))
+  File "/home/users/ntu/chih0001/anaconda3/envs/llava/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1518, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/home/users/ntu/chih0001/anaconda3/envs/llava/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1527, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/users/ntu/chih0001/anaconda3/envs/llava/lib/python3.10/site-packages/torch/nn/modules/container.py", line 215, in forward
+    input = module(input)
+  File "/home/users/ntu/chih0001/anaconda3/envs/llava/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1518, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/home/users/ntu/chih0001/anaconda3/envs/llava/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1527, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/users/ntu/chih0001/anaconda3/envs/llava/lib/python3.10/site-packages/torch/nn/modules/linear.py", line 114, in forward
+    return F.linear(input, self.weight, self.bias)
+RuntimeError: mat1 and mat2 shapes cannot be multiplied (1x1000 and 512x2)
+wandb: - 0.014 MB of 0.014 MB uploadedwandb: \ 0.014 MB of 0.014 MB uploadedwandb: | 0.014 MB of 0.018 MB uploadedwandb: / 0.026 MB of 0.026 MB uploadedwandb: 🚀 View run visionary-rain-9 at: https://wandb.ai/haozhuangchi/Baselines_CNN/runs/a3nlpcyd
+wandb: ⭐️ View project at: https://wandb.ai/haozhuangchi/Baselines_CNN
+wandb: Synced 6 W&B file(s), 0 media file(s), 0 artifact file(s) and 0 other file(s)
+wandb: Find logs at: ./wandb/run-20240507_174827-a3nlpcyd/logs

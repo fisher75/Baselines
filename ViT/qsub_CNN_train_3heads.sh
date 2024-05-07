@@ -10,7 +10,7 @@
 #PBS -P 12002486
 
 ### Specify name for job
-#PBS -N ViT_train_3heads
+#PBS -N CNN_train_3heads
 
 ### Standard output by default goes to file $PBS_JOBNAME.o$PBS_JOBID
 ### Standard error by default goes to file $PBS_JOBNAME.e$PBS_JOBID
@@ -35,5 +35,5 @@ conda activate llava
 export CUDA_VISIBLE_DEVICES=0
 
 cd /home/users/ntu/chih0001/scratch/model/baselines/ViT
-python ViT_train_3heads_test.py
+python CNN_train_3heads_test.py
 
