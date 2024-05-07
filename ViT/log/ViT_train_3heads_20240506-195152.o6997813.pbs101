@@ -1,0 +1,42 @@
+wandb: Currently logged in as: haozhuangchi. Use `wandb login --relogin` to force relogin
+wandb: Tracking run with wandb version 0.16.6
+wandb: Run data is saved locally in /scratch/users/ntu/chih0001/model/baselines/ViT/wandb/run-20240506_195215-z6al09d5
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run volcanic-moon-24
+wandb: ⭐️ View project at https://wandb.ai/haozhuangchi/Baselines_ViT
+wandb: 🚀 View run at https://wandb.ai/haozhuangchi/Baselines_ViT/runs/z6al09d5
+vit_tiny_patch16_224-Number of parameter: 5.5279M
+Train on the vit_tiny_patch16_224 model
+----------
+Training...
+../aten/src/ATen/native/cuda/Loss.cu:250: nll_loss_forward_reduce_cuda_kernel_2d: block: [0,0,0], thread: [0,0,0] Assertion `t >= 0 && t < n_classes` failed.
+Traceback (most recent call last):
+  File "/scratch/users/ntu/chih0001/model/baselines/ViT/various-models-exp_3heads.py", line 247, in <module>
+    main()
+  File "/scratch/users/ntu/chih0001/model/baselines/ViT/various-models-exp_3heads.py", line 244, in main
+    exgan.train()
+  File "/scratch/users/ntu/chih0001/model/baselines/ViT/various-models-exp_3heads.py", line 126, in train
+    pred, loss = self.model(X, ds, y)
+  File "/home/users/ntu/chih0001/anaconda3/envs/llava/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1518, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/home/users/ntu/chih0001/anaconda3/envs/llava/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1527, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/scratch/users/ntu/chih0001/model/baselines/ViT/various-models-exp_3heads.py", line 46, in forward
+    out = self.classifiers[d](feature[i].unsqueeze(0))
+  File "/home/users/ntu/chih0001/anaconda3/envs/llava/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1518, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/home/users/ntu/chih0001/anaconda3/envs/llava/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1527, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/users/ntu/chih0001/anaconda3/envs/llava/lib/python3.10/site-packages/torch/nn/modules/container.py", line 215, in forward
+    input = module(input)
+  File "/home/users/ntu/chih0001/anaconda3/envs/llava/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1518, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/home/users/ntu/chih0001/anaconda3/envs/llava/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1527, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/users/ntu/chih0001/anaconda3/envs/llava/lib/python3.10/site-packages/torch/nn/modules/linear.py", line 114, in forward
+    return F.linear(input, self.weight, self.bias)
+RuntimeError: CUDA error: CUBLAS_STATUS_EXECUTION_FAILED when calling cublasLtMatmul with transpose_mat1 1 transpose_mat2 0 m 10 n 1 k 192 mat1_ld 192 mat2_ld 192 result_ld 10 abcType 0 computeType 68 scaleType 0
+wandb: - 0.014 MB of 0.014 MB uploadedwandb: \ 0.014 MB of 0.014 MB uploadedwandb: | 0.014 MB of 0.014 MB uploadedwandb: / 0.014 MB of 0.014 MB uploadedwandb: - 0.018 MB of 0.029 MB uploadedwandb: \ 0.029 MB of 0.029 MB uploadedwandb: | 0.029 MB of 0.029 MB uploadedwandb: 🚀 View run volcanic-moon-24 at: https://wandb.ai/haozhuangchi/Baselines_ViT/runs/z6al09d5
+wandb: ⭐️ View project at: https://wandb.ai/haozhuangchi/Baselines_ViT
+wandb: Synced 6 W&B file(s), 0 media file(s), 2 artifact file(s) and 0 other file(s)
+wandb: Find logs at: ./wandb/run-20240506_195215-z6al09d5/logs

@@ -1,0 +1,29 @@
+wandb: Currently logged in as: haozhuangchi. Use `wandb login --relogin` to force relogin
+wandb: Tracking run with wandb version 0.16.6
+wandb: Run data is saved locally in /scratch/users/ntu/chih0001/model/baselines/CLIP/3heads_test/wandb/run-20240506_151710-qylvz7lf
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run rare-mountain-13
+wandb: ⭐️ View project at https://wandb.ai/haozhuangchi/Baselines_CLIP
+wandb: 🚀 View run at https://wandb.ai/haozhuangchi/Baselines_CLIP/runs/qylvz7lf
+CLIP-16-Number of parameter: 0.0092M
+Train on the CLIP-16 model
+----------
+Training...
+Traceback (most recent call last):
+  File "/scratch/users/ntu/chih0001/model/baselines/CLIP/3heads_test/various-models-exp.py", line 254, in <module>
+    main()
+  File "/scratch/users/ntu/chih0001/model/baselines/CLIP/3heads_test/various-models-exp.py", line 251, in main
+    exgan.train()
+  File "/scratch/users/ntu/chih0001/model/baselines/CLIP/3heads_test/various-models-exp.py", line 127, in train
+    pred, loss = self.model(X, ds, y)
+  File "/home/users/ntu/chih0001/anaconda3/envs/llava/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1518, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/home/users/ntu/chih0001/anaconda3/envs/llava/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1527, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/scratch/users/ntu/chih0001/model/baselines/CLIP/3heads_test/various-models-exp.py", line 46, in forward
+    _, pred = torch.max(out.data, 1)
+IndexError: Dimension out of range (expected to be in range of [-1, 0], but got 1)
+wandb: - 0.014 MB of 0.014 MB uploadedwandb: \ 0.014 MB of 0.024 MB uploadedwandb: | 0.024 MB of 0.024 MB uploadedwandb: / 0.024 MB of 0.024 MB uploadedwandb: 🚀 View run rare-mountain-13 at: https://wandb.ai/haozhuangchi/Baselines_CLIP/runs/qylvz7lf
+wandb: ⭐️ View project at: https://wandb.ai/haozhuangchi/Baselines_CLIP
+wandb: Synced 6 W&B file(s), 0 media file(s), 0 artifact file(s) and 0 other file(s)
+wandb: Find logs at: ./wandb/run-20240506_151710-qylvz7lf/logs

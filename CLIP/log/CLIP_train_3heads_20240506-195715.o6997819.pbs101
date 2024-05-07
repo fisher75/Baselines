@@ -1,0 +1,83 @@
+wandb: Currently logged in as: haozhuangchi. Use `wandb login --relogin` to force relogin
+wandb: Tracking run with wandb version 0.16.6
+wandb: Run data is saved locally in /scratch/users/ntu/chih0001/model/baselines/CLIP/3heads_test/wandb/run-20240506_195725-ctsqlua5
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run dainty-thunder-23
+wandb: ⭐️ View project at https://wandb.ai/haozhuangchi/Baselines_CLIP
+wandb: 🚀 View run at https://wandb.ai/haozhuangchi/Baselines_CLIP/runs/ctsqlua5
+CLIP-16-Number of parameter: 0.0092M
+Train on the CLIP-16 model
+----------
+Training...
+Epoch 0/9, Batch 10, Train Loss:36.1990,Train ACC:27.9167%
+Epoch 0/9, Batch 20, Train Loss:35.2879,Train ACC:29.1667%
+Epoch 0/9, Batch 30, Train Loss:34.9706,Train ACC:29.4444%
+Epoch 0/9, Batch 40, Train Loss:34.3126,Train ACC:30.2083%
+Epoch 0/9, Batch 50, Train Loss:34.0081,Train ACC:31.4167%
+Epoch 0/9, Batch 60, Train Loss:33.6088,Train ACC:33.2639%
+Epoch 0/9, Batch 70, Train Loss:33.0130,Train ACC:36.0714%
+Epoch 0/9, Batch 80, Train Loss:32.8925,Train ACC:38.5417%
+Epoch 0/9, Batch 90, Train Loss:32.6884,Train ACC:39.7222%
+Epoch 0/9, Batch 100, Train Loss:32.5911,Train ACC:41.3333%
+Epoch 0/9, Batch 110, Train Loss:32.1606,Train ACC:42.8409%
+Epoch 0/9, Batch 120, Train Loss:31.9928,Train ACC:44.0625%
+Epoch 0/9, Batch 130, Train Loss:31.8151,Train ACC:44.7115%
+Epoch 0/9, Batch 140, Train Loss:31.5538,Train ACC:45.5655%
+Epoch 0/9, Batch 150, Train Loss:31.2454,Train ACC:46.6944%
+Epoch 0/9, Batch 160, Train Loss:31.0658,Train ACC:47.1354%
+Epoch 0/9, Batch 170, Train Loss:30.9017,Train ACC:47.9902%
+Epoch 0/9, Batch 180, Train Loss:30.7638,Train ACC:48.5648%
+Epoch 0/9, Batch 190, Train Loss:30.4452,Train ACC:49.1447%
+Epoch 0/9, Batch 200, Train Loss:30.2462,Train ACC:49.6458%
+Batch 100, Test ACC:48.8333%
+Batch 200, Test ACC:48.8958%
+Batch 300, Test ACC:49.2361%
+Batch 400, Test ACC:49.1562%
+Batch 500, Test ACC:49.2333%
+Batch 600, Test ACC:49.3194%
+Batch 700, Test ACC:49.2976%
+Batch 800, Test ACC:49.2865%
+test Acc:49.4043%
+Dataset 1 Acc: 44.4406%
+Dataset 2 Acc: 16.2651%
+Dataset 3 Acc: 61.7559%
+程序运行时间:2分钟...
+Traceback (most recent call last):
+  File "/scratch/users/ntu/chih0001/model/baselines/CLIP/3heads_test/various-models-exp.py", line 258, in <module>
+    main()
+  File "/scratch/users/ntu/chih0001/model/baselines/CLIP/3heads_test/various-models-exp.py", line 255, in main
+    exgan.train()
+  File "/scratch/users/ntu/chih0001/model/baselines/CLIP/3heads_test/various-models-exp.py", line 158, in train
+    torch.save(self.model.state_dict(), "saved_models/model_{}_{}_{}_weights.pth".format(self.model_name, self.task_name, current_date))
+  File "/home/users/ntu/chih0001/anaconda3/envs/llava/lib/python3.10/site-packages/torch/serialization.py", line 618, in save
+    with _open_zipfile_writer(f) as opened_zipfile:
+  File "/home/users/ntu/chih0001/anaconda3/envs/llava/lib/python3.10/site-packages/torch/serialization.py", line 492, in _open_zipfile_writer
+    return container(name_or_buffer)
+  File "/home/users/ntu/chih0001/anaconda3/envs/llava/lib/python3.10/site-packages/torch/serialization.py", line 463, in __init__
+    super().__init__(torch._C.PyTorchFileWriter(self.name))
+RuntimeError: Parent directory saved_models does not exist.
+wandb: - 0.014 MB of 0.014 MB uploadedwandb: \ 0.014 MB of 0.014 MB uploadedwandb: | 0.014 MB of 0.014 MB uploadedwandb: / 0.014 MB of 0.014 MB uploadedwandb: - 0.019 MB of 0.028 MB uploaded (0.003 MB deduped)wandb: \ 0.031 MB of 0.031 MB uploaded (0.003 MB deduped)wandb: | 0.031 MB of 0.031 MB uploaded (0.003 MB deduped)wandb: 
+wandb: Run history:
+wandb: Dataset_1_accuracy ▁
+wandb: Dataset_2_accuracy ▁
+wandb: Dataset_3_accuracy ▁
+wandb:              batch ▁▂▃▄▅▆▇█
+wandb:     batch_test_acc ▁▂▇▆▇███
+wandb:              epoch ▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:      test_accuracy ▁
+wandb:         train_loss ▅█▆▄▆▆▅▅▅▅▄▇▂▄▅▄▅▄▄▄▁▂▃▆▄▄▂▃▂▂▁▄▃▄▃▃▃▃▁▅
+wandb: 
+wandb: Run summary:
+wandb: Dataset_1_accuracy 44.44057
+wandb: Dataset_2_accuracy 16.26506
+wandb: Dataset_3_accuracy 61.75586
+wandb:              batch 800
+wandb:     batch_test_acc 49.28646
+wandb:              epoch 0
+wandb:      test_accuracy 49.40432
+wandb:         train_loss 32.87759
+wandb: 
+wandb: 🚀 View run dainty-thunder-23 at: https://wandb.ai/haozhuangchi/Baselines_CLIP/runs/ctsqlua5
+wandb: ⭐️ View project at: https://wandb.ai/haozhuangchi/Baselines_CLIP
+wandb: Synced 6 W&B file(s), 0 media file(s), 2 artifact file(s) and 0 other file(s)
+wandb: Find logs at: ./wandb/run-20240506_195725-ctsqlua5/logs
