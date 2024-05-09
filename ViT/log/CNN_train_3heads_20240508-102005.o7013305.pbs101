@@ -1,0 +1,27 @@
+wandb: Currently logged in as: haozhuangchi. Use `wandb login --relogin` to force relogin
+wandb: wandb version 0.17.0 is available!  To upgrade, please run:
+wandb:  $ pip install wandb --upgrade
+wandb: Tracking run with wandb version 0.16.6
+wandb: Run data is saved locally in /scratch/users/ntu/chih0001/model/baselines/ViT/wandb/run-20240508_102033-a37eatiu
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run sleek-disco-13
+wandb: ⭐️ View project at https://wandb.ai/haozhuangchi/Baselines_CNN
+wandb: 🚀 View run at https://wandb.ai/haozhuangchi/Baselines_CNN/runs/a37eatiu
+/home/users/ntu/chih0001/anaconda3/envs/llava/lib/python3.10/site-packages/torchvision/models/_utils.py:208: UserWarning: The parameter 'pretrained' is deprecated since 0.13 and may be removed in the future, please use 'weights' instead.
+  warnings.warn(
+/home/users/ntu/chih0001/anaconda3/envs/llava/lib/python3.10/site-packages/torchvision/models/_utils.py:223: UserWarning: Arguments other than a weight enum or `None` for 'weights' are deprecated since 0.13 and may be removed in the future. The current behavior is equivalent to passing `weights=ResNet18_Weights.IMAGENET1K_V1`. You can also use `weights=ResNet18_Weights.DEFAULT` to get the most up-to-date weights.
+  warnings.warn(msg)
+Traceback (most recent call last):
+  File "/scratch/users/ntu/chih0001/model/baselines/ViT/CNN_train_3heads_new.py", line 236, in <module>
+    main()
+  File "/scratch/users/ntu/chih0001/model/baselines/ViT/CNN_train_3heads_new.py", line 232, in main
+    cnn_exp = CNNExperiment()
+  File "/scratch/users/ntu/chih0001/model/baselines/ViT/CNN_train_3heads_new.py", line 75, in __init__
+    self.dim = resnet_model.fc.in_features
+  File "/home/users/ntu/chih0001/anaconda3/envs/llava/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1695, in __getattr__
+    raise AttributeError(f"'{type(self).__name__}' object has no attribute '{name}'")
+AttributeError: 'Sequential' object has no attribute 'in_features'
+wandb: - 0.014 MB of 0.014 MB uploadedwandb: \ 0.014 MB of 0.014 MB uploadedwandb: | 0.014 MB of 0.014 MB uploadedwandb: / 0.014 MB of 0.014 MB uploadedwandb: - 0.018 MB of 0.028 MB uploadedwandb: \ 0.028 MB of 0.028 MB uploadedwandb: | 0.028 MB of 0.028 MB uploadedwandb: 🚀 View run sleek-disco-13 at: https://wandb.ai/haozhuangchi/Baselines_CNN/runs/a37eatiu
+wandb: ⭐️ View project at: https://wandb.ai/haozhuangchi/Baselines_CNN
+wandb: Synced 6 W&B file(s), 0 media file(s), 2 artifact file(s) and 0 other file(s)
+wandb: Find logs at: ./wandb/run-20240508_102033-a37eatiu/logs

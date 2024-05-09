@@ -10,7 +10,7 @@
 #PBS -P 12002486
 
 ### Specify name for job
-#PBS -N CLIP_zeroshot
+#PBS -N CLIP_zeroshot_my
 
 ### Standard output by default goes to file $PBS_JOBNAME.o$PBS_JOBID
 ### Standard error by default goes to file $PBS_JOBNAME.e$PBS_JOBID
@@ -30,7 +30,7 @@ exec > /home/users/ntu/chih0001/scratch/model/baselines/CLIP/log/${PBS_JOBNAME}_
 
 
 source /home/users/ntu/chih0001/anaconda3/etc/profile.d/conda.sh
-conda activate llava
+conda activate llava-test
 
 export CUDA_VISIBLE_DEVICES=0
 

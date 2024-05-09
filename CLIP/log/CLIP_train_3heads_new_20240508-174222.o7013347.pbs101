@@ -1,0 +1,43 @@
+wandb: Currently logged in as: haozhuangchi. Use `wandb login --relogin` to force relogin
+wandb: wandb version 0.17.0 is available!  To upgrade, please run:
+wandb:  $ pip install wandb --upgrade
+wandb: Tracking run with wandb version 0.16.6
+wandb: Run data is saved locally in /scratch/users/ntu/chih0001/model/baselines/CLIP/wandb/run-20240508_174257-dqbp5wdw
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run wandering-sponge-25
+wandb: ⭐️ View project at https://wandb.ai/haozhuangchi/Baselines_CLIP
+wandb: 🚀 View run at https://wandb.ai/haozhuangchi/Baselines_CLIP/runs/dqbp5wdw
+CLIP-16-Number of parameter: 0.0092M
+Train on the CLIP-16 model
+----------
+Training...
+Traceback (most recent call last):
+  File "/scratch/users/ntu/chih0001/model/baselines/CLIP/CLIP_train_3heads_new.py", line 232, in <module>
+    main()
+  File "/scratch/users/ntu/chih0001/model/baselines/CLIP/CLIP_train_3heads_new.py", line 229, in main
+    exgan.train()
+  File "/scratch/users/ntu/chih0001/model/baselines/CLIP/CLIP_train_3heads_new.py", line 106, in train
+    pred, loss = self.model(X, ds, y)
+  File "/home/users/ntu/chih0001/anaconda3/envs/llava/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1518, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/home/users/ntu/chih0001/anaconda3/envs/llava/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1527, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/scratch/users/ntu/chih0001/model/baselines/CLIP/CLIP_train_3heads_new.py", line 41, in forward
+    out = self.classifiers[d](feature[i].unsqueeze(0))
+  File "/home/users/ntu/chih0001/anaconda3/envs/llava/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1518, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/home/users/ntu/chih0001/anaconda3/envs/llava/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1527, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/users/ntu/chih0001/anaconda3/envs/llava/lib/python3.10/site-packages/torch/nn/modules/container.py", line 215, in forward
+    input = module(input)
+  File "/home/users/ntu/chih0001/anaconda3/envs/llava/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1518, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/home/users/ntu/chih0001/anaconda3/envs/llava/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1527, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/users/ntu/chih0001/anaconda3/envs/llava/lib/python3.10/site-packages/torch/nn/modules/linear.py", line 114, in forward
+    return F.linear(input, self.weight, self.bias)
+RuntimeError: mat1 and mat2 must have the same dtype, but got Half and Float
+wandb: - 0.014 MB of 0.014 MB uploadedwandb: \ 0.014 MB of 0.014 MB uploadedwandb: | 0.014 MB of 0.014 MB uploadedwandb: / 0.014 MB of 0.014 MB uploadedwandb: - 0.018 MB of 0.026 MB uploadedwandb: \ 0.029 MB of 0.029 MB uploadedwandb: 🚀 View run wandering-sponge-25 at: https://wandb.ai/haozhuangchi/Baselines_CLIP/runs/dqbp5wdw
+wandb: ⭐️ View project at: https://wandb.ai/haozhuangchi/Baselines_CLIP
+wandb: Synced 6 W&B file(s), 0 media file(s), 2 artifact file(s) and 0 other file(s)
+wandb: Find logs at: ./wandb/run-20240508_174257-dqbp5wdw/logs

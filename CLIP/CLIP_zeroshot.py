@@ -1,295 +1,104 @@
-import time
-import datetime as datetime
-from sklearn.linear_model import LogisticRegression
-import numpy as np
-from torch.autograd import Variable
-from torchvision import models
-import torch.nn as nn
+import os
 import torch
-import torchvision.transforms as transforms
-import timm
+import json
+from PIL import Image
 import clip
-import torchvision.transforms as trans
-from datasets import *
 import wandb
 from tqdm import tqdm
 
-
-
 # 初始化W&B
-wandb.init(project="Baselines_CLIP")
-config = wandb.config  # 设置配置
+wandb.init(project="CLIP_ZeroShot")
 
-config.batch_size = 24
-config.n_epochs = 10
-config.learning_rate = 0.00005
+# 定义数据集路径和类别描述
+dataset_path = "/home/users/ntu/chih0001/scratch/data/mixed/test"
+datasets = {
+    "ds1": ["Normal Driving", "Drinking", "Phoning Left", "Phoning Right", "Texting Left", "Texting Right", "Touching Hairs & Makeup", "Adjusting Glasses", "Reaching Behind", "Dropping"],
+    "ds2": ["Angry", "Disgust", "Fear", "Happy", "Sad", "Surprise"],
+    "ds3": ["Drowsy", "Non Drowsy"]
+}
 
-torch.cuda.set_device(0)
+# 可选的CLIP模型
+clip_models = ['ViT-B/16', 'ViT-B/32', 'ViT-L/14']
 
+# 函数：加载和预处理图像
+def load_and_preprocess_image(image_path, preprocess, device):
+    image = Image.open(image_path).convert("RGB")
+    return preprocess(image).unsqueeze(0).to(device)
 
-class ClipModel(nn.Module):
-    def __init__(self, clip_model, dim):
-        super(ClipModel, self).__init__()
-        self.classifiers = []
-        self.conv = clip_model.encode_image
-        self.classifier = nn.Sequential(nn.Linear(dim, 18))
+# 函数：进行零样本分类
+def classify_images(model, preprocess, device, model_name):
+    # 为每个数据集创建文本标签并tokenize
+    text_inputs = []
+    label_texts = []
+    for dataset, descriptions in datasets.items():
+        texts = [f"a photo of {desc}" for desc in descriptions]
+        label_texts.extend(descriptions)
+        tokenized = torch.cat([clip.tokenize(text).to(device) for text in texts])
+        text_inputs.append(tokenized)
 
-    def forward(self, x):
-        # print(ds)
-        feature = self.conv(x).type(torch.float32)
-        # print(feature.shape)
-        # feature = feature.view(feature.size(0), -1)
-        # print(feature.shape)
-        # out = self.classifier(feature)
-        
+    text_inputs = torch.cat(text_inputs, dim=0)
 
-        return feature
+    # 遍历测试集图片
+    results = []
+    correct_count = {key: 0 for key in datasets}
+    total_count = {key: 0 for key in datasets}
+    for image_name in tqdm(os.listdir(dataset_path), desc=f"Processing images with {model_name}"):
+        image_path = os.path.join(dataset_path, image_name)
+        image_input = load_and_preprocess_image(image_path, preprocess, device)
 
-
-class ExGAN():
-    def __init__(self, model_name):
-        super(ExGAN, self).__init__()
-        self.batch_size = config.batch_size
-        self.n_epochs = config.n_epochs
-        self.img_height = 224
-        self.img_width = 224
-        self.channels = 3
-        self.model_name = model_name
-        self.task = 5
-        self.task_name = "CLIP"
-
-        self.lr = config.learning_rate
-        self.b1 = 0.5
-        self.b2 = 0.999
-        self.log_write = open("./results/log_%s_results_in.txt" % (self.model_name), "w")
-
-        self.img_shape = (self.channels, self.img_height, self.img_width)
-        self.Tensor = torch.cuda.FloatTensor
-        self.LongTensor = torch.cuda.LongTensor
-
-        self.criterion_l1 = torch.nn.L1Loss().cuda()
-        self.criterion_l2 = torch.nn.MSELoss().cuda()
-        self.criterion_cls = torch.nn.CrossEntropyLoss().cuda()
-
-        if model_name == "CLIP-16":
-            device = "cuda:0" if torch.cuda.is_available() else "cpu"
-            clip_model, self.preprocess = clip.load('ViT-B/16', device)
-            self.dim = 512
-            self.model = ClipModel(clip_model, self.dim)
-
-        elif model_name == "CLIP-14":
-            device = "cuda:0" if torch.cuda.is_available() else "cpu"
-            clip_model, self.preprocess = clip.load('ViT-L/14', device)
-            self.dim = 768
-            self.model = ClipModel(clip_model, self.dim)
-
-        self.model = self.model.cuda()
-        total = sum([param.nelement() for param in self.model.parameters()])
-        print("%s-Number of parameter: %.4fM" % (self.model_name, total / 1e6))
-
-        # Optimizers
-        self.optimizer = torch.optim.Adam(self.model.parameters(), lr=self.lr, betas=(self.b1, self.b2))
-        self.Transform = self.preprocess
-
-        self.dataloader, self.test_dataloader = get_data(self.Transform, self.batch_size)
-
-
-    def get_features(self, dataset):
-        all_features = []
-        all_labels = []
-        all_datasets = []  # 用于跟踪每个样本属于哪个数据集
-
+        # 计算特征
         with torch.no_grad():
-            for batch, (imgA, label, ds) in enumerate(dataset, 1):
-                X, y, ds = imgA.cuda(), label, ds
-                features = self.model(X)
-                all_features.append(features)
-                all_labels.append(y)
-                all_datasets.extend(ds)  # 直接添加数据集编号
+            image_features = model.encode_image(image_input)
+            text_features = model.encode_text(text_inputs)
 
-        return torch.cat(all_features).cpu().numpy(), torch.cat(all_labels).cpu().numpy(), all_datasets
-    
-    def zero_shot_test(self):
-        train_features, train_labels, _ = self.get_features(self.dataloader)  # 添加一个_来接收数据集编号
-        test_features, test_labels, test_datasets = self.get_features(self.test_dataloader)
+        # 计算相似度并选择最高的预测
+        image_features /= image_features.norm(dim=-1, keepdim=True)
+        text_features /= text_features.norm(dim=-1, keepdim=True)
+        similarity = (100.0 * image_features @ text_features.T).softmax(dim=-1)
+        values, indices = similarity[0].topk(1)
 
-        # Perform logistic regression
-        classifier = LogisticRegression(random_state=0, C=0.316, max_iter=1000, verbose=1)
-        classifier.fit(train_features, train_labels)
+        # 记录结果
+        predicted_label = label_texts[indices[0].item()]
+        actual_label_index = int(image_name.split('_')[1][3])  # Extract label index from filename
+        actual_label = datasets[image_name[:3]][actual_label_index]
+        if predicted_label == actual_label:
+            correct_count[image_name[:3]] += 1
+        total_count[image_name[:3]] += 1
+        results.append({
+            "image_path": image_path,
+            "image_name": image_name,
+            "label": actual_label,
+            "prediction": predicted_label,
+            "dataset_id": image_name[:3],
+            "model": model_name
+        })
 
-        # Evaluate using the logistic regression classifier
-        predictions = classifier.predict(test_features)
-        total_accuracy = np.mean((test_labels == predictions).astype(float)) * 100.
-        print(f"Total Accuracy = {total_accuracy:.3f}%")
-        wandb.log({"total_accuracy": total_accuracy})  # Log total accuracy to WandB
+    # Calculate accuracy for each dataset
+    accuracies = {k: 100 * correct_count[k] / total_count[k] for k in datasets}
+    return results, accuracies, correct_count, total_count
 
-        # Initialize dataset accuracy tracking
-        dataset_accuracies = [0, 0, 0]  # For three datasets
-        dataset_counts = [0, 0, 0]
-
-        # Iterate through predictions to compute per-dataset accuracy
-        for pred, label, dataset in zip(predictions, test_labels, test_datasets):
-            dataset_index = dataset  # Already an integer
-            dataset_counts[dataset_index] += 1
-            if pred == label:
-                dataset_accuracies[dataset_index] += 1
-
-        # Print and log dataset accuracies
-        for i in range(3):
-            if dataset_counts[i] > 0:
-                acc = (dataset_accuracies[i] / dataset_counts[i]) * 100
-                print(f"Accuracy for Dataset {i+1}: {acc:.3f}%")
-                wandb.log({f"accuracy_dataset_{i+1}": acc})
-
-    
-    def train(self):
-        print('Train on the %s model' % self.model_name)
-        time_open = time.time()
-        phase = 'train'
-        best_accuracy = 0
-        average_accuracy = 0
-        num_test = 0
-        for epoch in range(self.n_epochs):
-            print("-" * 10)
-            print("Training...")
-            self.model.train(True)
-            running_loss = 0.0
-            running_corrects = 0
-            numSample = 0
-
-
-            for batch, (imgA, label, ds) in enumerate(self.dataloader, 1):
-                X, y = imgA, label
-                X, y = Variable(X.cuda()), Variable(y.cuda())
-                ds = ds.numpy()
-                numSample = numSample + y.size(0)
-                y_pred = self.model(X)
-                # print(y_pred.shape)
-                _, pred = torch.max(y_pred.data, 1)
-
-                self.optimizer.zero_grad()
-                loss = self.criterion_cls(y_pred, y)
-                loss.backward()
-                self.optimizer.step()
-
-                running_loss += loss.item()
-                running_corrects += torch.sum(pred == y.data)
-                
-                wandb.log({"train_loss": loss, "epoch": epoch})
-
-                if batch % 10 == 0:
-                    print("Epoch {}/{}, Batch {}, Train Loss:{:.4f},Train ACC:{:.4f}%".format(
-                        epoch, self.n_epochs - 1, batch, running_loss / batch, 100.0 * running_corrects / numSample
-                    ))
-
-                if batch % 200 == 0:
-                    testAcc, vidx, vpred, vlable = self.test(self.test_dataloader)
-                    num_test = num_test + 1
-                    self.log_write.write(str(epoch) + "    " + str(batch) + "    " + str(testAcc) + "\n")
-                    average_accuracy = average_accuracy + testAcc
-                    if testAcc > best_accuracy:
-                        best_accuracy = testAcc
-                        # 获取当前日期
-                        current_date = datetime.datetime.now().strftime("%Y-%m%d")
-                        # 保存模型权重
-                        torch.save(self.model.state_dict(), "saved_models/model_{}_{}_{}_weights.pth".format(self.model_name, self.task_name, current_date))
-                        # 打开日志文件以记录训练信息
-                        log_write_record = open("./results/log_{}_{}_{}_train_record_in.txt".format(self.model_name, self.task_name, current_date), "w")
-                        for r in range(len(vidx)):
-                            log_write_record.write(str(vidx[r]) + "  " + str(vpred[r]) + "  " + str(vlable[r]) + "\n")
-                        log_write_record.close()
-
-            epoch_loss = running_loss * 16 / numSample
-            epoch_acc = 100.0 * running_corrects / numSample
-
-            print("{} Loss:{:.4f} Acc:{:.4f}%".format(phase, epoch_loss, epoch_acc))
-
-            time_end = time.time() - time_open
-            print("程序运行时间:{}分钟...".format(int(time_end / 60)))
-
-            testAcc, vidx, vpred, vlable = self.test(self.test_dataloader)
-            num_test = num_test + 1
-            self.log_write.write(str(epoch) + "    " + str(batch) + "    " + str(testAcc) + "\n")
-            average_accuracy = average_accuracy + testAcc
-            if testAcc > best_accuracy:
-                best_accuracy = testAcc
-                torch.save(self.model.state_dict(), "saved_models/model_%s_%s_weights.pth" % (self.model_name, self.task_name))
-                log_write_record = open("./results/log_%s_%s_train_record_in.txt" % (self.model_name, self.task_name), "w")
-                for r in range(len(vidx)):
-                    log_write_record.write(str(vidx[r]) + "  " + str(vpred[r]) + "  " + str(vlable[r]) + "\n")
-                log_write_record.close()
-
-        average_accuracy = average_accuracy / num_test
-        print('The best accuracy is: ' + str(best_accuracy) + "\n")
-        print('The average accuracy is: ' + str(average_accuracy) + "\n")
-        self.log_write.write('The best accuracy is: ' + str(best_accuracy) + "\n")
-        self.log_write.write('The average accuracy is: ' + str(average_accuracy) + "\n")
-        self.log_write.close()
-
-
-    def test(self, dataloader):
-        time_open = time.time()
-        running_corrects = 0
-        numSample = 0
-        s_idx = 0
-        v_idx, v_pred, v_label = [], [], []
-
-        # 新增记录每个数据集的准确统计
-        dataset_corrects = [0, 0, 0]
-        dataset_totals = [0, 0, 0]
-
-        for batch, (imgA, label, ds) in enumerate(dataloader, 1):
-            X, y = imgA, label
-            X, y = Variable(X.cuda()), Variable(y.cuda())
-            ds = ds.numpy()
-            numSample += y.size(0)
-
-            y_pred = self.model(X)
-            _, pred = torch.max(y_pred.data, 1)
-            running_corrects += torch.sum(pred == y.data)
-
-            # 更新每个数据集的准确度统计
-            for k in range(len(label)):
-                dataset_index = ds[k]
-                dataset_totals[dataset_index] += 1
-                if pred[k] == label[k]:
-                    dataset_corrects[dataset_index] += 1
-
-                v_idx.append(s_idx)
-                v_pred.append(pred[k].item())
-                v_label.append(label[k].item())
-                s_idx += 1
-
-            if batch % 100 == 0:
-                current_acc = 100.0 * running_corrects / numSample
-                print("Batch {}, Test ACC:{:.4f}%".format(
-                    batch, 100.0 * running_corrects / numSample))
-                wandb.log({"batch_test_acc": current_acc, "batch": batch})  # Log to W&B
-
-        epoch_acc = 100.0 * running_corrects.item() / numSample
-        print("{} Acc:{:.4f}%".format('test', epoch_acc))
-        wandb.log({"test_accuracy": epoch_acc})  # Log to W&B
-
-        # 打印每个数据集的准确度
-        for i in range(3):
-            if dataset_totals[i] > 0:
-                dataset_acc = 100.0 * dataset_corrects[i] / dataset_totals[i]
-                print("Dataset {} Acc: {:.4f}%".format(i + 1, dataset_acc))
-                # Log to W&B
-                wandb.log({f"Dataset_{i+1}_accuracy": dataset_acc})
-
-        time_end = time.time() - time_open
-        print("程序运行时间:{}分钟...".format(int(time_end / 60)))
-
-        return epoch_acc, v_idx, v_pred, v_label
-
-
-
+# 主函数
 def main():
-    models_list = ['CLIP-16'] # 14大，16小
-    for model in models_list:
-        exgan = ExGAN(model)
-        exgan.zero_shot_test()
+    results_path = "/home/users/ntu/chih0001/scratch/model/baselines/CLIP/zeroshot_results"
+    os.makedirs(results_path, exist_ok=True)
+
+    for model_name in clip_models:
+        device = "cuda" if torch.cuda.is_available() else "cpu"
+        model, preprocess = clip.load(model_name, device)
+        print(f"Processing with model: {model_name}")
+        results, accuracies, correct_count, total_count = classify_images(model, preprocess, device, model_name)
+
+        # 保存结果到JSONL文件和TXT文件
+        with open(os.path.join(results_path, f"results_{model_name.replace('/', '-')}.jsonl"), 'w') as jsonl_file, \
+             open(os.path.join(results_path, f"accuracy_{model_name.replace('/', '-')}.txt"), 'w') as txt_file:
+            for result in results:
+                jsonl_file.write(json.dumps(result) + '\n')
+            txt_file.write(f"Accuracies for {model_name}:\n")
+            for dataset, acc in accuracies.items():
+                txt_file.write(f"{dataset}: {acc:.2f}% ({correct_count[dataset]}/{total_count[dataset]})\n")
+                print(f"Accuracy for {dataset} using {model_name}: {acc:.2f}% ({correct_count[dataset]}/{total_count[dataset]})")
+
+    wandb.finish()
 
 if __name__ == "__main__":
     main()

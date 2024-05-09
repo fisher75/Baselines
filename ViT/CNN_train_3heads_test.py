@@ -210,24 +210,36 @@ class ExGAN():
             X, y = imgA, labelA
             X, y = Variable(X.cuda()), Variable(y.cuda())
             ds = ds.numpy()
-            numSample = numSample + y.size(0)
+            numSample += y.size(0)
 
             pred, loss = self.model(X, ds, y)
             running_loss += loss.item() * X.size(0)  # 更新累计的测试损失
             running_corrects += torch.sum(pred == y.data)
+
+            for k in range(len(y)):
+                dataset_index = ds[k]
+                dataset_totals[dataset_index] += 1
+                if pred[k] == y[k]:
+                    dataset_corrects[dataset_index] += 1
+
+                v_idx.append(s_idx)
+                v_pred.append(pred[k].item())
+                v_label.append(y[k].item())
+                s_idx += 1
 
             if batch % 100 == 0:
                 current_loss = running_loss / numSample  # 计算当前平均测试损失
                 current_acc = 100.0 * running_corrects / numSample
                 print("Batch {}, Test Loss:{:.4f}, Test ACC:{:.4f}%".format(
                     batch, current_loss, current_acc))
-                wandb.log({"batch_test_loss": current_loss, "batch_test_acc": current_acc, "batch": batch})  # Log to W&B
+                wandb.log({"batch_test_loss": current_loss, "batch_test_acc": current_acc, "batch": batch})
 
         epoch_loss = running_loss / numSample
         epoch_acc = 100.0 * running_corrects.item() / numSample
         print("Test Loss:{:.4f} Acc:{:.4f}%".format(epoch_loss, epoch_acc))
-        wandb.log({"test_loss": epoch_loss, "test_accuracy": epoch_acc})  # Log to W&B
-        # 打印每个数据集的准确度
+        wandb.log({"test_loss": epoch_loss, "test_accuracy": epoch_acc})
+
+        # 打印并记录每个数据集的准确度
         for i in range(3):
             if dataset_totals[i] > 0:
                 dataset_acc = 100.0 * dataset_corrects[i] / dataset_totals[i]
@@ -238,7 +250,6 @@ class ExGAN():
         print("程序运行时间:{}分钟...".format(int(time_end / 60)))
 
         return epoch_acc, v_idx, v_pred, v_label
-
 
 
 def main():

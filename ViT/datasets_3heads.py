@@ -13,17 +13,21 @@ class FERDataset(Dataset):
     def __init__(self, transforms_=None, mode='train'):
         self.transform = transforms_
         data_root = '/home/users/ntu/chih0001/scratch/data/mixed'
-        self.root = data_root + "/" + mode + "/"
-        self.files = os.listdir(self.root)
+        self.root = os.path.join(data_root, mode)
+        self.files = [f for f in os.listdir(self.root) if f.endswith('.jpg')]  # 确保只处理.jpg文件
 
     def __getitem__(self, index):
         filename = self.files[index % len(self.files)]
-        ds_num = int((filename.split('ds')[-1]).split('_')[0]) - 1
-        label = int((filename.split('cls')[-1]).split('_')[0])
-        imgpath = self.root + filename
-        img = self.transform(Image.open(imgpath))
-
-        return img, label, ds_num
+        try:
+            ds_num = int((filename.split('ds')[-1]).split('_')[0]) - 1
+            label = int((filename.split('cls')[-1]).split('_')[0])
+            imgpath = os.path.join(self.root, filename)
+            img = self.transform(Image.open(imgpath))
+            return img, label, ds_num
+        except Exception as e:
+            # 处理文件名解析错误或文件读取错误
+            print(f"Error processing file {filename}: {e}")
+            return None, None, None
 
     def __len__(self):
         return len(self.files)
