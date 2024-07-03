@@ -12,8 +12,7 @@ from torchvision.datasets import CIFAR100
 class FERDataset(Dataset):
     def __init__(self, transforms_=None, mode='train'):
         self.transform = transforms_
-        data_root = '/home/users/ntu/chih0001/scratch/data/mixed' # 这个是全数据train
-        # data_root = '/home/users/ntu/chih0001/scratch/data/mixed' # 这个是fewshot的10shot用的
+        data_root = '/home/users/ntu/chih0001/scratch/data/mixed/10shot' # 这个是fewshot的10shot用的
         self.root = data_root + "/" + mode + "/"
         self.files = os.listdir(self.root)
 

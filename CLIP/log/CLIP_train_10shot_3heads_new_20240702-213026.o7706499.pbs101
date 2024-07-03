@@ -1,0 +1,350 @@
+wandb: Currently logged in as: haozhuangchi. Use `wandb login --relogin` to force relogin
+wandb: wandb version 0.17.3 is available!  To upgrade, please run:
+wandb:  $ pip install wandb --upgrade
+wandb: Tracking run with wandb version 0.16.6
+wandb: Run data is saved locally in /scratch/users/ntu/chih0001/model/baselines/CLIP/wandb/run-20240702_213106-n6iy8gqo
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run dulcet-breeze-28
+wandb: ⭐️ View project at https://wandb.ai/haozhuangchi/Baselines_CLIP
+wandb: 🚀 View run at https://wandb.ai/haozhuangchi/Baselines_CLIP/runs/n6iy8gqo
+CLIP-14-Number of parameter: 0.0138M
+Train on the CLIP-14 model
+----------
+Training...
+Epoch 0/9, Batch 10, Train Loss:53.7865,Train ACC:10.0000%
+Epoch 0/9, Batch 20, Train Loss:53.2596,Train ACC:12.5000%
+Epoch 0/9, Batch 30, Train Loss:53.0410,Train ACC:12.9167%
+Epoch 0/9, Batch 40, Train Loss:52.7157,Train ACC:14.1667%
+Epoch 0/9, Batch 50, Train Loss:52.6252,Train ACC:14.2500%
+Epoch 0/9, Batch 60, Train Loss:52.3270,Train ACC:15.2778%
+Epoch 0/9, Batch 70, Train Loss:52.1172,Train ACC:16.9048%
+Epoch 0/9, Batch 80, Train Loss:51.9077,Train ACC:17.5521%
+Epoch 0/9, Batch 90, Train Loss:51.7038,Train ACC:18.2870%
+Epoch 0/9, Batch 100, Train Loss:51.5155,Train ACC:19.5833%
+Epoch 0/9, Batch 110, Train Loss:51.3599,Train ACC:20.6818%
+Epoch 0/9, Batch 120, Train Loss:51.1645,Train ACC:21.4236%
+Epoch 0/9, Batch 130, Train Loss:51.0361,Train ACC:22.3077%
+Epoch 0/9, Batch 140, Train Loss:50.8639,Train ACC:22.9762%
+train Loss:33.8989 Acc:23.1901%
+程序运行时间:0分钟...
+Batch 100, Test ACC:47.5000%
+Batch 200, Test ACC:47.8542%
+Batch 300, Test ACC:48.1528%
+Batch 400, Test ACC:48.0625%
+Batch 500, Test ACC:47.9167%
+Batch 600, Test ACC:47.8819%
+Batch 700, Test ACC:47.8869%
+Batch 800, Test ACC:47.8229%
+test Acc:47.7627%
+Dataset 1 Acc: 42.5711%
+Dataset 2 Acc: 31.0241%
+Dataset 3 Acc: 59.7865%
+程序运行时间:1分钟...
+----------
+Training...
+Epoch 1/9, Batch 10, Train Loss:47.8910,Train ACC:38.3333%
+Epoch 1/9, Batch 20, Train Loss:47.8415,Train ACC:39.1667%
+Epoch 1/9, Batch 30, Train Loss:47.6896,Train ACC:40.2778%
+Epoch 1/9, Batch 40, Train Loss:47.5692,Train ACC:41.5625%
+Epoch 1/9, Batch 50, Train Loss:47.4013,Train ACC:43.1667%
+Epoch 1/9, Batch 60, Train Loss:47.3907,Train ACC:43.8889%
+Epoch 1/9, Batch 70, Train Loss:47.2854,Train ACC:43.9881%
+Epoch 1/9, Batch 80, Train Loss:47.2223,Train ACC:45.1042%
+Epoch 1/9, Batch 90, Train Loss:47.0673,Train ACC:45.0463%
+Epoch 1/9, Batch 100, Train Loss:46.9282,Train ACC:45.2500%
+Epoch 1/9, Batch 110, Train Loss:46.8766,Train ACC:45.6439%
+Epoch 1/9, Batch 120, Train Loss:46.6494,Train ACC:46.5625%
+Epoch 1/9, Batch 130, Train Loss:46.5120,Train ACC:47.1795%
+Epoch 1/9, Batch 140, Train Loss:46.3831,Train ACC:47.4405%
+train Loss:30.9144 Acc:47.4985%
+程序运行时间:2分钟...
+Batch 100, Test ACC:59.5833%
+Batch 200, Test ACC:60.3333%
+Batch 300, Test ACC:60.6944%
+Batch 400, Test ACC:60.5521%
+Batch 500, Test ACC:60.4083%
+Batch 600, Test ACC:60.3125%
+Batch 700, Test ACC:60.3393%
+Batch 800, Test ACC:60.3125%
+test Acc:60.2955%
+Dataset 1 Acc: 58.2031%
+Dataset 2 Acc: 57.5301%
+Dataset 3 Acc: 64.9429%
+程序运行时间:0分钟...
+----------
+Training...
+Epoch 2/9, Batch 10, Train Loss:44.8735,Train ACC:55.0000%
+Epoch 2/9, Batch 20, Train Loss:44.5950,Train ACC:55.8333%
+Epoch 2/9, Batch 30, Train Loss:44.3357,Train ACC:56.1111%
+Epoch 2/9, Batch 40, Train Loss:44.2764,Train ACC:56.0417%
+Epoch 2/9, Batch 50, Train Loss:44.0156,Train ACC:56.4167%
+Epoch 2/9, Batch 60, Train Loss:43.9633,Train ACC:56.8750%
+Epoch 2/9, Batch 70, Train Loss:43.7673,Train ACC:57.0833%
+Epoch 2/9, Batch 80, Train Loss:43.5998,Train ACC:57.0313%
+Epoch 2/9, Batch 90, Train Loss:43.4338,Train ACC:57.3611%
+Epoch 2/9, Batch 100, Train Loss:43.2337,Train ACC:57.5833%
+Epoch 2/9, Batch 110, Train Loss:43.1466,Train ACC:57.6136%
+Epoch 2/9, Batch 120, Train Loss:43.0708,Train ACC:58.0556%
+Epoch 2/9, Batch 130, Train Loss:42.9833,Train ACC:58.0128%
+Epoch 2/9, Batch 140, Train Loss:42.8347,Train ACC:58.0060%
+train Loss:28.5178 Acc:58.1813%
+程序运行时间:3分钟...
+Batch 100, Test ACC:67.6250%
+Batch 200, Test ACC:67.7917%
+Batch 300, Test ACC:68.1806%
+Batch 400, Test ACC:68.2500%
+Batch 500, Test ACC:68.1250%
+Batch 600, Test ACC:68.1111%
+Batch 700, Test ACC:68.1607%
+Batch 800, Test ACC:68.0677%
+test Acc:68.0253%
+Dataset 1 Acc: 67.9688%
+Dataset 2 Acc: 68.9759%
+Dataset 3 Acc: 68.0998%
+程序运行时间:0分钟...
+----------
+Training...
+Epoch 3/9, Batch 10, Train Loss:41.2288,Train ACC:59.5833%
+Epoch 3/9, Batch 20, Train Loss:41.1501,Train ACC:61.8750%
+Epoch 3/9, Batch 30, Train Loss:40.9057,Train ACC:62.2222%
+Epoch 3/9, Batch 40, Train Loss:40.8628,Train ACC:61.9792%
+Epoch 3/9, Batch 50, Train Loss:40.6590,Train ACC:62.7500%
+Epoch 3/9, Batch 60, Train Loss:40.5484,Train ACC:63.3333%
+Epoch 3/9, Batch 70, Train Loss:40.4327,Train ACC:63.0952%
+Epoch 3/9, Batch 80, Train Loss:40.4053,Train ACC:62.9688%
+Epoch 3/9, Batch 90, Train Loss:40.1615,Train ACC:63.4722%
+Epoch 3/9, Batch 100, Train Loss:40.0722,Train ACC:63.3750%
+Epoch 3/9, Batch 110, Train Loss:40.0023,Train ACC:63.4470%
+Epoch 3/9, Batch 120, Train Loss:39.8450,Train ACC:63.9583%
+Epoch 3/9, Batch 130, Train Loss:39.7298,Train ACC:64.1346%
+Epoch 3/9, Batch 140, Train Loss:39.6806,Train ACC:64.2262%
+train Loss:26.4539 Acc:64.1260%
+程序运行时间:4分钟...
+Batch 100, Test ACC:70.9167%
+Batch 200, Test ACC:70.9583%
+Batch 300, Test ACC:71.4444%
+Batch 400, Test ACC:71.3229%
+Batch 500, Test ACC:71.3417%
+Batch 600, Test ACC:71.3056%
+Batch 700, Test ACC:71.4107%
+Batch 800, Test ACC:71.3906%
+test Acc:71.3039%
+Dataset 1 Acc: 71.9936%
+Dataset 2 Acc: 73.7952%
+Dataset 3 Acc: 69.6933%
+程序运行时间:0分钟...
+----------
+Training...
+Epoch 4/9, Batch 10, Train Loss:38.8396,Train ACC:64.1667%
+Epoch 4/9, Batch 20, Train Loss:38.1884,Train ACC:66.2500%
+Epoch 4/9, Batch 30, Train Loss:38.1085,Train ACC:66.5278%
+Epoch 4/9, Batch 40, Train Loss:38.1193,Train ACC:65.4167%
+Epoch 4/9, Batch 50, Train Loss:37.9069,Train ACC:65.8333%
+Epoch 4/9, Batch 60, Train Loss:37.7411,Train ACC:65.5556%
+Epoch 4/9, Batch 70, Train Loss:37.6594,Train ACC:65.5357%
+Epoch 4/9, Batch 80, Train Loss:37.5500,Train ACC:66.2500%
+Epoch 4/9, Batch 90, Train Loss:37.4907,Train ACC:66.5278%
+Epoch 4/9, Batch 100, Train Loss:37.3571,Train ACC:67.2500%
+Epoch 4/9, Batch 110, Train Loss:37.2417,Train ACC:67.0076%
+Epoch 4/9, Batch 120, Train Loss:37.1590,Train ACC:67.0833%
+Epoch 4/9, Batch 130, Train Loss:37.1178,Train ACC:66.8590%
+Epoch 4/9, Batch 140, Train Loss:37.0316,Train ACC:66.7560%
+train Loss:24.6706 Acc:66.7157%
+程序运行时间:5分钟...
+Batch 100, Test ACC:72.7500%
+Batch 200, Test ACC:72.7292%
+Batch 300, Test ACC:73.2361%
+Batch 400, Test ACC:73.0938%
+Batch 500, Test ACC:73.0083%
+Batch 600, Test ACC:72.9028%
+Batch 700, Test ACC:72.9286%
+Batch 800, Test ACC:72.9427%
+test Acc:72.8612%
+Dataset 1 Acc: 73.2840%
+Dataset 2 Acc: 76.8072%
+Dataset 3 Acc: 71.7529%
+程序运行时间:0分钟...
+----------
+Training...
+Epoch 5/9, Batch 10, Train Loss:36.6189,Train ACC:69.1667%
+Epoch 5/9, Batch 20, Train Loss:35.8391,Train ACC:72.7083%
+Epoch 5/9, Batch 30, Train Loss:35.7216,Train ACC:71.5278%
+Epoch 5/9, Batch 40, Train Loss:35.6518,Train ACC:70.9375%
+Epoch 5/9, Batch 50, Train Loss:35.6269,Train ACC:71.2500%
+Epoch 5/9, Batch 60, Train Loss:35.3082,Train ACC:70.9028%
+Epoch 5/9, Batch 70, Train Loss:35.2235,Train ACC:70.2381%
+Epoch 5/9, Batch 80, Train Loss:35.0559,Train ACC:70.5729%
+Epoch 5/9, Batch 90, Train Loss:34.9606,Train ACC:70.8333%
+Epoch 5/9, Batch 100, Train Loss:34.9548,Train ACC:70.0833%
+Epoch 5/9, Batch 110, Train Loss:34.9981,Train ACC:70.0000%
+Epoch 5/9, Batch 120, Train Loss:34.8645,Train ACC:70.2431%
+Epoch 5/9, Batch 130, Train Loss:34.7561,Train ACC:70.6090%
+Epoch 5/9, Batch 140, Train Loss:34.7167,Train ACC:70.7143%
+train Loss:23.1313 Acc:70.7475%
+程序运行时间:6分钟...
+Batch 100, Test ACC:75.1667%
+Batch 200, Test ACC:74.5208%
+Batch 300, Test ACC:74.7778%
+Batch 400, Test ACC:74.7604%
+Batch 500, Test ACC:74.7250%
+Batch 600, Test ACC:74.7153%
+Batch 700, Test ACC:74.6071%
+Batch 800, Test ACC:74.6562%
+test Acc:74.5450%
+Dataset 1 Acc: 75.9208%
+Dataset 2 Acc: 80.1205%
+Dataset 3 Acc: 71.3019%
+程序运行时间:0分钟...
+----------
+Training...
+Epoch 6/9, Batch 10, Train Loss:32.6520,Train ACC:71.2500%
+Epoch 6/9, Batch 20, Train Loss:33.0191,Train ACC:71.8750%
+Epoch 6/9, Batch 30, Train Loss:33.4155,Train ACC:72.5000%
+Epoch 6/9, Batch 40, Train Loss:33.6162,Train ACC:70.3125%
+Epoch 6/9, Batch 50, Train Loss:33.5072,Train ACC:70.0833%
+Epoch 6/9, Batch 60, Train Loss:33.4469,Train ACC:70.6250%
+Epoch 6/9, Batch 70, Train Loss:33.2216,Train ACC:71.4286%
+Epoch 6/9, Batch 80, Train Loss:33.1399,Train ACC:71.6146%
+Epoch 6/9, Batch 90, Train Loss:32.9000,Train ACC:71.9444%
+Epoch 6/9, Batch 100, Train Loss:32.7828,Train ACC:72.6667%
+Epoch 6/9, Batch 110, Train Loss:32.7452,Train ACC:72.8030%
+Epoch 6/9, Batch 120, Train Loss:32.8052,Train ACC:72.8472%
+Epoch 6/9, Batch 130, Train Loss:32.7027,Train ACC:72.9167%
+Epoch 6/9, Batch 140, Train Loss:32.6513,Train ACC:72.9464%
+train Loss:21.7796 Acc:73.0135%
+程序运行时间:7分钟...
+Batch 100, Test ACC:75.3750%
+Batch 200, Test ACC:75.0000%
+Batch 300, Test ACC:75.2361%
+Batch 400, Test ACC:75.0521%
+Batch 500, Test ACC:74.9417%
+Batch 600, Test ACC:74.9167%
+Batch 700, Test ACC:74.8750%
+Batch 800, Test ACC:74.9635%
+test Acc:74.8452%
+Dataset 1 Acc: 75.6696%
+Dataset 2 Acc: 82.2289%
+Dataset 3 Acc: 72.6999%
+程序运行时间:0分钟...
+----------
+Training...
+Epoch 7/9, Batch 10, Train Loss:32.0676,Train ACC:72.9167%
+Epoch 7/9, Batch 20, Train Loss:31.9227,Train ACC:73.9583%
+Epoch 7/9, Batch 30, Train Loss:31.7491,Train ACC:72.9167%
+Epoch 7/9, Batch 40, Train Loss:31.5140,Train ACC:72.6042%
+Epoch 7/9, Batch 50, Train Loss:31.2036,Train ACC:73.9167%
+Epoch 7/9, Batch 60, Train Loss:31.2411,Train ACC:73.8194%
+Epoch 7/9, Batch 70, Train Loss:31.1606,Train ACC:74.1071%
+Epoch 7/9, Batch 80, Train Loss:31.1476,Train ACC:73.9583%
+Epoch 7/9, Batch 90, Train Loss:31.0418,Train ACC:74.7685%
+Epoch 7/9, Batch 100, Train Loss:31.0689,Train ACC:74.5000%
+Epoch 7/9, Batch 110, Train Loss:31.0107,Train ACC:74.5833%
+Epoch 7/9, Batch 120, Train Loss:30.9773,Train ACC:74.3056%
+Epoch 7/9, Batch 130, Train Loss:30.9292,Train ACC:74.4551%
+Epoch 7/9, Batch 140, Train Loss:30.9122,Train ACC:74.4345%
+train Loss:20.6100 Acc:74.4556%
+程序运行时间:8分钟...
+Batch 100, Test ACC:77.1250%
+Batch 200, Test ACC:76.4792%
+Batch 300, Test ACC:76.6250%
+Batch 400, Test ACC:76.6562%
+Batch 500, Test ACC:76.6083%
+Batch 600, Test ACC:76.5903%
+Batch 700, Test ACC:76.5536%
+Batch 800, Test ACC:76.6146%
+test Acc:76.5666%
+Dataset 1 Acc: 78.0971%
+Dataset 2 Acc: 83.1325%
+Dataset 3 Acc: 72.9405%
+程序运行时间:0分钟...
+----------
+Training...
+Epoch 8/9, Batch 10, Train Loss:28.6499,Train ACC:74.5833%
+Epoch 8/9, Batch 20, Train Loss:28.7955,Train ACC:77.0833%
+Epoch 8/9, Batch 30, Train Loss:29.4135,Train ACC:76.2500%
+Epoch 8/9, Batch 40, Train Loss:29.6251,Train ACC:75.1042%
+Epoch 8/9, Batch 50, Train Loss:29.6408,Train ACC:75.2500%
+Epoch 8/9, Batch 60, Train Loss:29.5987,Train ACC:74.8611%
+Epoch 8/9, Batch 70, Train Loss:29.5031,Train ACC:75.2381%
+Epoch 8/9, Batch 80, Train Loss:29.3812,Train ACC:74.8958%
+Epoch 8/9, Batch 90, Train Loss:29.3376,Train ACC:75.1389%
+Epoch 8/9, Batch 100, Train Loss:29.3620,Train ACC:75.3750%
+Epoch 8/9, Batch 110, Train Loss:29.3880,Train ACC:75.1894%
+Epoch 8/9, Batch 120, Train Loss:29.3936,Train ACC:75.1042%
+Epoch 8/9, Batch 130, Train Loss:29.4095,Train ACC:75.2564%
+Epoch 8/9, Batch 140, Train Loss:29.3980,Train ACC:75.4762%
+train Loss:19.5755 Acc:75.4561%
+程序运行时间:9分钟...
+Batch 100, Test ACC:77.2500%
+Batch 200, Test ACC:77.1042%
+Batch 300, Test ACC:77.2639%
+Batch 400, Test ACC:77.1979%
+Batch 500, Test ACC:77.0250%
+Batch 600, Test ACC:76.9722%
+Batch 700, Test ACC:76.8274%
+Batch 800, Test ACC:76.9271%
+test Acc:76.8058%
+Dataset 1 Acc: 77.9506%
+Dataset 2 Acc: 86.4458%
+Dataset 3 Acc: 73.8575%
+程序运行时间:0分钟...
+----------
+Training...
+Epoch 9/9, Batch 10, Train Loss:28.8379,Train ACC:75.4167%
+Epoch 9/9, Batch 20, Train Loss:28.4790,Train ACC:75.4167%
+Epoch 9/9, Batch 30, Train Loss:28.4272,Train ACC:76.5278%
+Epoch 9/9, Batch 40, Train Loss:28.3653,Train ACC:76.0417%
+Epoch 9/9, Batch 50, Train Loss:28.2896,Train ACC:75.6667%
+Epoch 9/9, Batch 60, Train Loss:28.1483,Train ACC:75.9722%
+Epoch 9/9, Batch 70, Train Loss:28.1380,Train ACC:76.2500%
+Epoch 9/9, Batch 80, Train Loss:28.1679,Train ACC:75.7813%
+Epoch 9/9, Batch 90, Train Loss:28.1346,Train ACC:75.9722%
+Epoch 9/9, Batch 100, Train Loss:27.9836,Train ACC:76.2083%
+Epoch 9/9, Batch 110, Train Loss:27.8901,Train ACC:76.3258%
+Epoch 9/9, Batch 120, Train Loss:28.0175,Train ACC:75.9722%
+Epoch 9/9, Batch 130, Train Loss:27.9650,Train ACC:75.9295%
+Epoch 9/9, Batch 140, Train Loss:27.9391,Train ACC:75.8631%
+train Loss:18.6582 Acc:75.7799%
+程序运行时间:10分钟...
+Batch 100, Test ACC:79.5000%
+Batch 200, Test ACC:79.1667%
+Batch 300, Test ACC:79.2500%
+Batch 400, Test ACC:79.1250%
+Batch 500, Test ACC:78.9000%
+Batch 600, Test ACC:78.7708%
+Batch 700, Test ACC:78.7917%
+Batch 800, Test ACC:78.8281%
+test Acc:78.7195%
+Dataset 1 Acc: 80.5385%
+Dataset 2 Acc: 86.7470%
+Dataset 3 Acc: 74.3987%
+程序运行时间:0分钟...
+The best accuracy is: 78.71951219512195
+
+The average accuracy is: 70.17307692307693
+
+wandb: - 0.014 MB of 0.014 MB uploadedwandb: \ 0.014 MB of 0.014 MB uploadedwandb: | 0.014 MB of 0.014 MB uploadedwandb: / 0.014 MB of 0.014 MB uploadedwandb: - 0.014 MB of 0.014 MB uploadedwandb: \ 0.018 MB of 0.038 MB uploadedwandb: | 0.038 MB of 0.038 MB uploadedwandb: 
+wandb: Run history:
+wandb: Dataset_1_accuracy ▁▄▆▆▇▇▇███
+wandb: Dataset_2_accuracy ▁▄▆▆▇▇▇███
+wandb: Dataset_3_accuracy ▁▃▅▆▇▇▇▇██
+wandb:              batch ▁▃▅▇▁▃▅▇▁▃▅▇▁▃▅▇▁▃▅▇▁▃▅▇▁▃▅▇▁▃▅▇▁▃▅▇▁▃▅█
+wandb:     batch_test_acc ▁▁▁▁▄▄▄▄▅▆▆▆▆▆▆▆▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇██▇▇████
+wandb:              epoch ▁▁▁▁▂▂▂▂▃▃▃▃▃▃▃▃▄▄▄▄▅▅▅▅▆▆▆▆▆▆▆▆▇▇▇▇████
+wandb:      test_accuracy ▁▄▆▆▇▇▇███
+wandb:         train_loss ██▇▇▆▆▆▆▆▆▆▅▄▅▄▄▄▄▃▃▄▃▃▃▄▃▃▂▂▂▂▂▂▃▁▃▃▁▁▂
+wandb: 
+wandb: Run summary:
+wandb: Dataset_1_accuracy 80.5385
+wandb: Dataset_2_accuracy 86.74699
+wandb: Dataset_3_accuracy 74.39868
+wandb:              batch 800
+wandb:     batch_test_acc 78.82812
+wandb:              epoch 9
+wandb:      test_accuracy 78.71951
+wandb:         train_loss 19.54384
+wandb: 
+wandb: 🚀 View run dulcet-breeze-28 at: https://wandb.ai/haozhuangchi/Baselines_CLIP/runs/n6iy8gqo
+wandb: ⭐️ View project at: https://wandb.ai/haozhuangchi/Baselines_CLIP
+wandb: Synced 6 W&B file(s), 0 media file(s), 2 artifact file(s) and 0 other file(s)
+wandb: Find logs at: ./wandb/run-20240702_213106-n6iy8gqo/logs
