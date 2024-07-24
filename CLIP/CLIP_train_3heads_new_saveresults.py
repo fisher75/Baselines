@@ -8,6 +8,9 @@ import timm
 import clip
 from datasets_3heads import *
 import wandb
+from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score
+import pandas as pd
+import os
 
 # 初始化W&B
 wandb.init(project="Baselines_CLIP")
@@ -163,7 +166,7 @@ class ExGAN():
         running_corrects = 0
         numSample = 0
         s_idx = 0
-        v_idx, v_pred, v_label = [], [], []
+        v_idx, v_pred, v_label, v_ds = [], [], [], []
 
         dataset_corrects = [0, 0, 0]
         dataset_totals = [0, 0, 0]
@@ -186,6 +189,7 @@ class ExGAN():
                 v_idx.append(s_idx)
                 v_pred.append(pred[k].item())
                 v_label.append(label[k].item())
+                v_ds.append(ds[k])
                 s_idx += 1
 
             if batch % 100 == 0:
@@ -206,6 +210,40 @@ class ExGAN():
 
         time_end = time.time() - time_open
         print("程序运行时间:{}分钟...".format(int(time_end / 60)))
+
+        # 保存预测结果
+        results = pd.DataFrame({
+            'index': v_idx,
+            'prediction': v_pred,
+            'label': v_label,
+            'dataset': v_ds
+        })
+        results_dir = './results'
+        if not os.path.exists(results_dir):
+            os.makedirs(results_dir)
+        current_date = datetime.datetime.now().strftime("%Y-%m%d")
+        results_path = os.path.join(results_dir, f"CLIP_{current_date}_results.csv")
+        results.to_csv(results_path, index=False)
+
+        # 计算并记录指标
+        for i in range(3):
+            ds_mask = (results['dataset'] == i)
+            ds_preds = results[ds_mask]['prediction']
+            ds_labels = results[ds_mask]['label']
+
+            if len(ds_labels) > 0:
+                accuracy = accuracy_score(ds_labels, ds_preds)
+                precision = precision_score(ds_labels, ds_preds, average='weighted')
+                recall = recall_score(ds_labels, ds_preds, average='weighted')
+                f1 = f1_score(ds_labels, ds_preds, average='weighted')
+
+                print(f"Dataset {i+1} - Accuracy: {accuracy:.4f}, Precision: {precision:.4f}, Recall: {recall:.4f}, F1 Score: {f1:.4f}")
+                wandb.log({
+                    f"Dataset_{i+1}_accuracy": accuracy,
+                    f"Dataset_{i+1}_precision": precision,
+                    f"Dataset_{i+1}_recall": recall,
+                    f"Dataset_{i+1}_f1_score": f1
+                })
 
         return epoch_acc, v_idx, v_pred, v_label
 
