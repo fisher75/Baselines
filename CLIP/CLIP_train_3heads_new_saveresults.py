@@ -41,7 +41,7 @@ class ClipModel(nn.Module):
         predictions = []
         for i, d in enumerate(ds):
             y = label[i].unsqueeze(0)
-            out = self.classifiers[d](feature[i].unsqueeze(0)) # 根据ds选择分类器
+            out = self.classifiers[d](feature[i].unsqueeze(0))
             _, pred = torch.max(out.data, 1)
             loss += self.criterion_cls(out, y)
             predictions.append(pred)
@@ -233,9 +233,9 @@ class ExGAN():
 
             if len(ds_labels) > 0:
                 accuracy = accuracy_score(ds_labels, ds_preds)
-                precision = precision_score(ds_labels, ds_preds, average='weighted')
-                recall = recall_score(ds_labels, ds_preds, average='weighted')
-                f1 = f1_score(ds_labels, ds_preds, average='weighted')
+                precision = precision_score(ds_labels, ds_preds, average='weighted', zero_division=0)
+                recall = recall_score(ds_labels, ds_preds, average='weighted', zero_division=0)
+                f1 = f1_score(ds_labels, ds_preds, average='weighted', zero_division=0)
 
                 print(f"Dataset {i+1} - Accuracy: {accuracy:.4f}, Precision: {precision:.4f}, Recall: {recall:.4f}, F1 Score: {f1:.4f}")
                 wandb.log({
@@ -249,7 +249,7 @@ class ExGAN():
 
 
 def main():
-    models_list = ['CLIP-14']  # Assuming CLIP-16 corresponds to 'ViT-B/16'
+    models_list = ['CLIP-16']  # Assuming CLIP-16 corresponds to 'ViT-B/16'
     for model in models_list:
         exgan = ExGAN(model)
         exgan.train()
