@@ -4,13 +4,13 @@
 #PBS -l select=1:ngpus=1:ncpus=16
 
 ### Specify amount of time required
-#PBS -l walltime=20:00:00
+#PBS -l walltime=10:00:00
 
 ### Specify project code
 #PBS -P personal-chih0001
 
 ### Specify name for job
-#PBS -N CLIP_train_10shot_3heads_new
+#PBS -N CLIP_zeroshot_multi
 
 ### Standard output by default goes to file $PBS_JOBNAME.o$PBS_JOBID
 ### Standard error by default goes to file $PBS_JOBNAME.e$PBS_JOBID
@@ -35,5 +35,5 @@ conda activate llava-test
 export CUDA_VISIBLE_DEVICES=0
 
 cd /home/users/ntu/chih0001/scratch/model/baselines/CLIP
-python CLIP_train_3heads_fewshot.py
+python CLIP_zeroshot_mutlievaluation.py
 

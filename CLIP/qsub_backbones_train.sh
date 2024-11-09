@@ -10,7 +10,7 @@
 #PBS -P personal-chih0001
 
 ### Specify name for job
-#PBS -N CLIP_train_10shot_3heads_new
+#PBS -N backbones_train_3heads
 
 ### Standard output by default goes to file $PBS_JOBNAME.o$PBS_JOBID
 ### Standard error by default goes to file $PBS_JOBNAME.e$PBS_JOBID
@@ -26,7 +26,7 @@
 NOW=$(date +%Y%m%d-%H%M%S)
 
 # 将标准输出和错误重定向到包含日期时间的文件名
-exec > /home/users/ntu/chih0001/scratch/model/baselines/CLIP/log/${PBS_JOBNAME}_${NOW}.o${PBS_JOBID} 2>&1
+# exec > /home/users/ntu/chih0001/scratch/model/baselines/CLIP/log/${PBS_JOBNAME}_${NOW}.o${PBS_JOBID} 2>&1
 
 
 source /home/users/ntu/chih0001/anaconda3/etc/profile.d/conda.sh
@@ -34,6 +34,6 @@ conda activate llava-test
 
 export CUDA_VISIBLE_DEVICES=0
 
-cd /home/users/ntu/chih0001/scratch/model/baselines/CLIP
-python CLIP_train_3heads_fewshot.py
+cd /home/users/ntu/chih0001/scratch/VLM/Baselines/CLIP
+python backbones_train_3heads.py
 

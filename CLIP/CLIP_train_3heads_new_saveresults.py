@@ -22,6 +22,8 @@ config.learning_rate = 0.00005
 
 torch.cuda.set_device(0)
 
+#多个Class用多种backbone：比如Resnet/VGG
+
 class ClipModel(nn.Module):
     def __init__(self, clip_model, dim):
         super(ClipModel, self).__init__()
