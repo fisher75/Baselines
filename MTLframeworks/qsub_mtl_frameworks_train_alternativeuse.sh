@@ -28,10 +28,9 @@ NOW=$(date +%Y%m%d-%H%M%S)
 # 将标准输出和错误重定向到包含日期时间的文件名
 # exec > /home/users/ntu/chih0001/scratch/model/baselines/CLIP/log/${PBS_JOBNAME}_${NOW}.o${PBS_JOBID} 2>&1
 
-
 source /home/users/ntu/chih0001/anaconda3/etc/profile.d/conda.sh
 conda activate llava-test
 
 cd /home/users/ntu/chih0001/scratch/VLM/Baselines/MTLframeworks
-python mtl_frameworks_train.py
+python mtl_frameworks_train_alternativeuse.py
 

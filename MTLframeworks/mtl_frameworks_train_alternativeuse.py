@@ -62,7 +62,7 @@ class SimpleCrossStitch(nn.Module):
             task3_output = self.cls3(feature)
             # 根据 d 选择输出层
             out = [task1_output, task2_output, task3_output][d][i].unsqueeze(0)
-            _, pred = torch.max(out.detach(), 1)
+            _, pred = torch.max(out.data, 1)
             loss += self.criterion_cls(out, y)
             predictions.append(pred)
         predictions = torch.cat(predictions, dim=0)
@@ -89,7 +89,7 @@ class SimpleMTAN(nn.Module):
             y = label[i].unsqueeze(0).cuda()
             task_feature = feature[i] * [self.attention1, self.attention2, self.attention3][d]
             out = [self.cls1, self.cls2, self.cls3][d](task_feature.unsqueeze(0))
-            _, pred = torch.max(out.detach(), 1)
+            _, pred = torch.max(out.data, 1)
             loss += self.criterion_cls(out, y)
             predictions.append(pred)
         predictions = torch.cat(predictions, dim=0)
@@ -112,7 +112,7 @@ class SimpleMoE(nn.Module):
         for i, d in enumerate(ds):
             y = label[i].unsqueeze(0).cuda()
             out = [self.expert1, self.expert2, self.expert3][d](feature[i].unsqueeze(0))
-            _, pred = torch.max(out.detach(), 1)
+            _, pred = torch.max(out.data, 1)
             loss += self.criterion_cls(out, y)
             predictions.append(pred)
         predictions = torch.cat(predictions, dim=0)
@@ -186,28 +186,34 @@ def initialize_model(model_name, framework_name):
             nn.AdaptiveAvgPool2d((1, 1)),          # 添加 AdaptiveAvgPool2d 使输出符合 [batch_size, feature_dim]
             nn.Flatten(start_dim=1)                # 展平为 [batch_size, feature_dim]
         )
-    elif model_name == "VGG16": # 加入
+    elif model_name == "VGG16":  # 加入
         backbone_model = models.vgg16(pretrained=True).cuda()
         dim = backbone_model.classifier[-1].in_features
-        backbone_model.classifier = backbone_model.classifier[:-1]
-        backbone_model = nn.Sequential(backbone_model, nn.AdaptiveAvgPool2d((1, 1)), nn.Flatten())
+        # 移除 VGG16 分类层并添加 Flatten 操作
+        backbone_model.classifier = nn.Sequential(*list(backbone_model.classifier.children())[:-1])
+        backbone_model = nn.Sequential(
+            backbone_model,
+            nn.Flatten(start_dim=1)  # 展平为 [batch_size, feature_dim]
+        )
     elif model_name == "EfficientNet-B0": 
-        # EfficientNet-B0 输出已经是 2 维，不需要 AdaptiveAvgPool2d
         backbone_model = timm.create_model('efficientnet_b0', pretrained=True).cuda()
         dim = backbone_model.classifier.in_features
         backbone_model.reset_classifier(0)
+        # EfficientNet 输出特征已经为二维，因此不使用 AdaptiveAvgPool2d
         backbone_model = nn.Sequential(backbone_model, nn.Flatten(start_dim=1))
     elif model_name == "DenseNet121":
         backbone_model = models.densenet121(pretrained=True).cuda()
         dim = backbone_model.classifier.in_features
         backbone_model.classifier = nn.Identity()
+        # DenseNet121 适用 AdaptiveAvgPool2d
         backbone_model = nn.Sequential(backbone_model, nn.AdaptiveAvgPool2d((1, 1)), nn.Flatten())
     elif model_name == "ConvNeXt-Base":
         backbone_model = timm.create_model('convnext_base', pretrained=True).cuda()
         dim = backbone_model.head.fc.in_features
         backbone_model.head.fc = nn.Identity()
+        # ConvNeXt-Base 适用 AdaptiveAvgPool2d
         backbone_model = nn.Sequential(backbone_model, nn.AdaptiveAvgPool2d((1, 1)), nn.Flatten())
-    elif model_name == "ViT-Base": # 加入
+    elif model_name == "ViT-Base": 
         backbone_model = timm.create_model('vit_base_patch16_224', pretrained=True).cuda()
         dim = backbone_model.head.in_features
         backbone_model.head = nn.Identity()
@@ -215,6 +221,7 @@ def initialize_model(model_name, framework_name):
         backbone_model = models.mobilenet_v3_large(pretrained=True).cuda()
         dim = backbone_model.classifier[-1].in_features
         backbone_model.classifier = nn.Identity()
+        # MobileNetV3-Large 适用 AdaptiveAvgPool2d
         backbone_model = nn.Sequential(backbone_model, nn.AdaptiveAvgPool2d((1, 1)), nn.Flatten())
     else:
         raise ValueError("Unsupported model name!")
@@ -394,10 +401,10 @@ class ExGAN():
 # 主函数
 def main():
     # model_names = ['ResNet50', 'EfficientNet-B0', 'VGG16', 'DenseNet121', 'ConvNeXt-Base', 'ViT-Base', 'MobileNetV3-Large', 'CLIP-16']
-    # model_names = ['VGG16', 'ViT-Base']  # 这两个也加上
-    model_names = ['ResNet50']
+    model_names = ['VGG16', 'ViT-Base']  # 这两个也加上
+    # model_names = ['ResNet50']
     # frameworks = ['SimpleCrossStitch', 'SimpleMTAN', 'SimpleMoE', 'TaskMoE']  # 最好加一个比较新的
-    frameworks = ['TaskMoE']
+    frameworks = ['SimpleCrossStitch', 'SimpleMTAN', 'SimpleMoE', 'TaskMoE', 'TaskMoE']
 
     for model_name in model_names:
         for framework_name in frameworks:
